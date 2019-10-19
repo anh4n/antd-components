@@ -41,13 +41,16 @@ export const Button = (props) => {
 export const AddButton = ({ icon = 'plus', children = 'Add', ...restProps }) =>
     <Button icon={icon} {...restProps}>{children}</Button>;
 
-export const DeleteButton = ({ icon = 'delete', children = 'Edit', ...restProps }) =>
+export const DeleteButton = ({ icon = 'delete', children = 'Delete', ...restProps }) =>
     <Button icon={icon} {...restProps}>{children}</Button>;
 
-export const EditButton = ({ icon = 'edit', children = 'Delete', ...restProps }) =>
+export const EditButton = ({ icon = 'edit', children = 'Edit', ...restProps }) =>
     <Button icon={icon} {...restProps}>{children}</Button>;
 
 export const ReloadButton = ({ icon = 'reload', children = 'Reload', ...restProps }) =>
+    <Button icon={icon} {...restProps}>{children}</Button>;
+
+export const BackButton = ({ icon = 'left', children = 'Back', ...restProps }) =>
     <Button icon={icon} {...restProps}>{children}</Button>;
 
 export const SearchButton = ({ icon = 'search', children = 'Search', ...restProps }) =>

@@ -12,7 +12,7 @@ import {
     UndoButton,
     SettingsButton,
     BasketButton,
-    SaveButton
+    SaveButton, BackButton
 } from '../../../src';
 import {message} from "antd";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
@@ -47,6 +47,12 @@ const Example = () => (
             text={'<ReloadButton onClick={onClick}/>'}
             onCopy={() => onCopy('<ReloadButton onClick={onClick} />')}>
             <ReloadButton />
+        </CopyToClipboard>
+
+        <CopyToClipboard
+            text={'<BackButton onClick={onClick}/>'}
+            onCopy={() => onCopy('<BackButton onClick={onClick} />')}>
+            <BackButton />
         </CopyToClipboard>
 
         <CopyToClipboard
@@ -116,6 +122,7 @@ const code = `
                 <DeleteButton onClick={onClick} />
                 <EditButton onClick={onClick} />           
                 <ReloadButton onClick={onClick} />
+                <BackButton onClick={onClick} />
                 <SearchButton onClick={onClick} />
                 <SaveButton onClick={onClick} />
                 <CancelButton onClick={onClick} />
