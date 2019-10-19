@@ -9,7 +9,7 @@ import { Editor as TinyMCE } from '@tinymce/tinymce-react';
  */
 
 export const Editor = forwardRef((props, ref) => {
-    const {id, value, 'data-__field': dataField, 'data-__meta': dataMeta ,onChange, ...restProps} = props;
+    const { id, value, 'data-__field': dataField, 'data-__meta': dataMeta, onChange, ...restProps } = props;
 
     const onEditorChange = (content) => {
         onChange(content);

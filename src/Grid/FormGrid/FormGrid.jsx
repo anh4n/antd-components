@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Table from 'antd/lib/table';
 import { Column } from './Column';
 import { message, Form } from 'antd';
-import { Button, AddButton, DeleteButton, EditButton, BackButton } from '../..';
+import { AddButton, DeleteButton, EditButton, BackButton, SaveButton } from '../..';
 import { renderForm } from '../renderer';
 
 /**
@@ -105,10 +105,10 @@ export const FormGrid = Form.create()((props) => {
 
                 return (
                     <Fragment>
-                        <BackButton onClick={() => setEditing(false)} />
+                        <BackButton onClick={() => setEditing(false)}/>
                         <Form>
                             {renderForm(props, children)}
-                            <Button onClick={onSaveClick} icon={'save'}>Save</Button>
+                            <SaveButton onClick={onSaveClick}/>
                         </Form>
                     </Fragment>
                 );
