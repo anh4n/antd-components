@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { Editor as TinyMCE } from '@tinymce/tinymce-react';
 
@@ -7,35 +7,42 @@ import { Editor as TinyMCE } from '@tinymce/tinymce-react';
  *
  * @constructor
  */
-export const Editor = () => {
 
-    const handleEditorChange = (e) => {
-        console.log('Content was updated:', e.target.getContent());
+export const Editor = forwardRef((props) => {
+    const {id, value, 'data-__field': dataField, 'data-__meta': dataMeta ,onChange, ref, ...restProps} = props;
+
+    const onEditorChange = (e) => {
+        onChange(e.target.getContent());
     };
 
     return (
         <TinyMCE
-            initialValue="<p>This is the initial content of the editor</p>"
-            init={{
-                height: 500,
-                menubar: false,
-                plugins: [
-                    'advlist autolink lists link image charmap print preview anchor',
-                    'searchreplace visualblocks code fullscreen',
-                    'insertdatetime media table paste code help wordcount'
-                ],
-                toolbar:
-                    'undo redo | formatselect | bold italic backcolor | \
-                    alignleft aligncenter alignright alignjustify | \
-                    bullist numlist outdent indent | removeformat | help'
-            }}
-            onChange={handleEditorChange}
+            ref={ref}
+            value={value}
+            onChange={onEditorChange}
+            init={restProps}
         />
     );
-};
+});
 
 Editor.defaultProps = {
+    height: 500,
+    menubar: false,
+    plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste code help wordcount'
+    ],
+    toolbar:
+        'undo redo | formatselect | bold italic backcolor | \
+        alignleft aligncenter alignright alignjustify | \
+        bullist numlist outdent indent | removeformat | help'
 };
 
 Editor.propTypes = {
+    height: PropTypes.number,
+    menubar: PropTypes.bool,
+    plugins: PropTypes.arrayOf(PropTypes.string),
+    toolbar: PropTypes.string,
+    value: PropTypes.string
 };

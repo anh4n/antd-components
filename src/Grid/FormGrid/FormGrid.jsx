@@ -18,7 +18,6 @@ export const FormGrid = Form.create()((props) => {
     const [record, setRecord] = useState({});
     const [data, setData] = useState(dataSource);
 
-
     let selected = [];
 
     useEffect(() => {
@@ -91,16 +90,29 @@ export const FormGrid = Form.create()((props) => {
                 return data;
             }
         })
-        (props =>
-            (
-                <Fragment>
-                    <Button onClick={() => setEditing(false)} icon={'left'}>Back</Button>
-                <Form>
-                    {renderForm(props, children)}
-                    <Button icon={'save'}>Save</Button>
-                </Form>
-                </Fragment>
-            )
+        (props => {
+                const { form } = props;
+
+                const onSaveClick = () => {
+                    form.validateFields((error, data) => {
+                        if (error) {
+                            return message.error('form validation failed');
+                        }
+
+                        console.log(data);
+                    });
+                };
+
+                return (
+                    <Fragment>
+                        <Button onClick={() => setEditing(false)} icon={'left'}>Back</Button>
+                        <Form>
+                            {renderForm(props, children)}
+                            <Button onClick={onSaveClick} icon={'save'}>Save</Button>
+                        </Form>
+                    </Fragment>
+                );
+            }
         );
 
         return <FormWrapper {...record}/>;
