@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const DOCS_DIR = path.resolve(__dirname, 'docs');
 
@@ -25,6 +26,11 @@ module.exports = {
             },
         ]
     },
+    plugins: [
+        new CopyPlugin([
+            { from: 'node_modules/tinymce', to: 'tinymce' }
+        ])
+    ],
     devServer: {
         host: '0.0.0.0',
         hot: true,
