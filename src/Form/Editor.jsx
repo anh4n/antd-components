@@ -8,18 +8,18 @@ import { Editor as TinyMCE } from '@tinymce/tinymce-react';
  * @constructor
  */
 
-export const Editor = forwardRef((props) => {
-    const {id, value, 'data-__field': dataField, 'data-__meta': dataMeta ,onChange, ref, ...restProps} = props;
+export const Editor = forwardRef((props, ref) => {
+    const {id, value, 'data-__field': dataField, 'data-__meta': dataMeta ,onChange, ...restProps} = props;
 
-    const onEditorChange = (e) => {
-        onChange(e.target.getContent());
+    const onEditorChange = (content) => {
+        onChange(content);
     };
 
     return (
         <TinyMCE
             ref={ref}
             value={value}
-            onChange={onEditorChange}
+            onEditorChange={onEditorChange}
             init={restProps}
         />
     );
