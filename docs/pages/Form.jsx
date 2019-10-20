@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Display2 } from '../../src';
 import DynamicFormItem from '../examples/Form/DynamicFormItem';
 import Editor from '../examples/Form/Editor';
+import CodeMirror from '../examples/Form/CodeMirror';
 
 /**
  * @return {React.Component}
@@ -12,6 +13,7 @@ export const Form = () => {
             <Display2>Form</Display2>
             <DynamicFormItem/>
             <Editor/>
+            <CodeMirror/>
         </Fragment>
     );
 };

@@ -3,7 +3,7 @@ import Switch from 'antd/lib/switch';
 import Popover from 'antd/lib/popover';
 import Input from 'antd/lib/input';
 import Form from 'antd/lib/form';
-import { Editor } from '../../src';
+import { Editor, CodeMirror } from '../../src';
 
 export const getDisplay = (fieldType, record, dataIndex, children, maxLength) => {
     if (fieldType === 'boolean') {
@@ -83,6 +83,12 @@ export const renderForm = (props, columns) => {
                 return (
                     <Form.Item label={title}>
                         {getFieldDecorator(dataIndex)(<Editor/>)}
+                    </Form.Item>
+                );
+            case 'object':
+                return (
+                    <Form.Item label={title}>
+                        {getFieldDecorator(dataIndex)(<CodeMirror/>)}
                     </Form.Item>
                 );
             default:
