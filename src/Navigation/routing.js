@@ -1,11 +1,27 @@
-import { matchPath } from 'react-router';
+import { matchPath, Route } from 'react-router';
+import React from 'react';
 
-export const getActiveRoutes = (routes, location) => {
+export const renderRoutes = (routes, parentPath = '') => (
+    routes.map(route => {
+        const {submenu, path} = route;
+        const currentPath = parentPath + path;
+
+        if (submenu) {
+            return renderRoutes(submenu, currentPath);
+        }
+
+        return <Route {...route} path={currentPath} />;
+    })
+);
+
+export const getActiveRoutes = (routes, location, parentPath = '') => {
     let activeRoutes = [];
 
     routes.forEach(route => {
+        const currentPath = parentPath + route.path;
+
         const match = matchPath(location.pathname, {
-            path: route.path,
+            path: currentPath,
             exact: route.exact || false,
             strict: route.strict || false
         });
@@ -19,7 +35,7 @@ export const getActiveRoutes = (routes, location) => {
         if (subitem) {
             activeRoutes = [
                 ...activeRoutes,
-                ...getActiveRoutes(subitem, location)
+                ...getActiveRoutes(subitem, location, route.group ? parentPath : currentPath)
             ];
         }
     });

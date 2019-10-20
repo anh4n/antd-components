@@ -2,8 +2,8 @@ import { NotFound } from './pages/NotFound';
 import { Home } from './pages/Home';
 import { Typography } from './pages/Typography';
 import { Form } from './pages/Form';
-import {FlyoutNavigationComponent, SideNavigationComponent} from './pages/Navigation';
-import {DataGridComponent, FormGridComponent} from './pages/Grid';
+import { FlyoutNavigationComponent, SideNavigationComponent } from './pages/Navigation';
+import { DataGridComponent, FormGridComponent } from './pages/Grid';
 import { Buttons } from './pages/Buttons';
 
 export const routes = [
@@ -40,13 +40,13 @@ export const routes = [
             {
                 key: 'dataGrid',
                 label: 'Data Grid',
-                path: '/Navigation/DataGrid',
+                path: '/DataGrid',
                 component: DataGridComponent
             },
             {
                 key: 'formGrid',
                 label: 'Form Grid',
-                path: '/Navigation/FormGrid',
+                path: '/FormGrid',
                 component: FormGridComponent
             }
         ],
@@ -59,13 +59,13 @@ export const routes = [
             {
                 key: 'flyout',
                 label: 'Flyout',
-                path: '/Navigation/Flyout',
+                path: '/Flyout',
                 component: FlyoutNavigationComponent
             },
             {
                 key: 'side',
                 label: 'Side Navi',
-                path: '/Navigation/Side',
+                path: '/Side',
                 component: SideNavigationComponent
             }
         ],

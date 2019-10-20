@@ -10,22 +10,23 @@ const renderLabel = (label, icon) => {
     );
 };
 
-export const renderMenuItem = ({key, label, path, icon}) => (
+const renderMenuItem = ({ key, label, path, icon }) => (
     <Menu.Item key={key}>
         <NavLink to={path}>{renderLabel(label, icon)}</NavLink>
     </Menu.Item>
 );
 
-export const renderMenu = routes => (
+export const renderMenu = (routes, parentPath = '') => (
     routes.map(route => {
-        const {key, label, path, icon, hideInMenu, submenu, group} = route;
+        const { key, label, path, icon, hideInMenu, submenu, group } = route;
+        const currentPath = parentPath + path;
 
         if (hideInMenu) return null;
 
         if (group) {
             return (
                 <Menu.ItemGroup key={key} title={label}>
-                    {renderMenu(group)}
+                    {renderMenu(group, parentPath)}
                 </Menu.ItemGroup>
             )
         }
@@ -33,11 +34,11 @@ export const renderMenu = routes => (
         if (submenu) {
             return (
                 <Menu.SubMenu key={key} title={renderLabel(label, icon)}>
-                    {renderMenu(submenu)}
+                    {renderMenu(submenu, currentPath)}
                 </Menu.SubMenu>
             )
         }
 
-        return renderMenuItem({key, label, path, icon});
+        return renderMenuItem({ key, label, path: currentPath, icon });
     })
 );

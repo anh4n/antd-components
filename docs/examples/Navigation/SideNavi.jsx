@@ -15,17 +15,17 @@ const Example = () => {
                     key: '11',
                     label: 'Submenu',
                     icon: 'usb',
-                    path: '/Navigation/Side/Home/Submenu',
+                    path: '/Submenu',
                     submenu: [
                         {
                             key: '111',
                             label: 'Sub-Submenu',
-                            path: '/Navigation/Side/Home/Submenu/1',
+                            path: '/1',
                             submenu: [
                                 {
                                     key: '1111',
                                     label: 'Sub-Sub-Submenu',
-                                    path: '/Navigation/Side/Home/Submenu/1/1',
+                                    path: '/1',
                                 }
                             ]
                         }
@@ -35,7 +35,7 @@ const Example = () => {
                     key: '12',
                     label: 'Highlights',
                     icon: 'highlight',
-                    path: '/Navigation/Side/Home/Highlights',
+                    path: '/Highlights',
                 },
                 {
                     key: '13',
@@ -44,12 +44,12 @@ const Example = () => {
                         {
                             key: '131',
                             label: 'Product 1',
-                            path: '/Navigation/Side/Home/Product1',
+                            path: '/Product1',
                         },
                         {
                             key: '132',
                             label: 'Product 2',
-                            path: '/Navigation/Side/Home/Product2',
+                            path: '/Product2',
                         }
                     ]
                 }
@@ -64,13 +64,13 @@ const Example = () => {
                 {
                     key: '21',
                     label: 'Person 1',
-                    path: '/Navigation/Side/Contact/Person1',
+                    path: '/Person1',
 
                 },
                 {
                     key: '22',
                     label: 'Person 2',
-                    path: '/Navigation/Side/Contact/Person2',
+                    path: '/Person2',
                 }
             ]
         },
@@ -110,17 +110,17 @@ const code = `
                         key: '11',
                         label: 'Submenu',
                         icon: 'usb',
-                        path: '/Navigation/Side/Home/Submenu',
+                        path: '/Submenu',
                         submenu: [
                             {
                                 key: '111',
                                 label: 'Sub-Submenu',
-                                path: '/Navigation/Side/Home/Submenu/1',
+                                path: '/1',
                                 submenu: [
                                     {
                                         key: '1111',
                                         label: 'Sub-Sub-Submenu',
-                                        path: '/Navigation/Side/Home/Submenu/1/1',
+                                        path: '/1',
                                     }
                                 ]
                             }
@@ -130,7 +130,7 @@ const code = `
                         key: '12',
                         label: 'Highlights',
                         icon: 'highlight',
-                        path: '/Navigation/Side/Home/Highlights',
+                        path: '/Highlights',
                     },
                     {
                         key: '13',
@@ -139,12 +139,12 @@ const code = `
                             {
                                 key: '131',
                                 label: 'Product 1',
-                                path: '/Navigation/Side/Home/Product1',
+                                path: '/Product1',
                             },
                             {
                                 key: '132',
                                 label: 'Product 2',
-                                path: '/Navigation/Side/Home/Product2',
+                                path: '/Product2',
                             }
                         ]
                     }
@@ -155,6 +155,19 @@ const code = `
                 label: 'Contact',
                 icon: 'contacts',
                 path: '/Navigation/Side/Contact',
+                submenu: [
+                    {
+                        key: '21',
+                        label: 'Person 1',
+                        path: '/Person1',
+
+                    },
+                    {
+                        key: '22',
+                        label: 'Person 2',
+                        path: '/Person2',
+                    }
+                ]
             },
             {
                 key: 'side-about',

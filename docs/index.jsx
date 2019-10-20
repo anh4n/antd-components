@@ -1,24 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import { Row, Col } from 'antd';
 import { CustomCol, Wrapper } from './components/utils';
 import { routes } from './routes';
 import { Menu } from './Menu';
 import { Display1 } from '../src';
-
-export const renderRoutes = (routesArr) => (
-    routesArr.map(route => {
-        const {submenu} = route;
-
-        if (submenu) {
-            return renderRoutes(submenu);
-        }
-
-        return <Route {...route} />;
-    })
-);
+import { renderRoutes } from '../src/Navigation/routing';
 
 ReactDOM.render(
     <Router>
