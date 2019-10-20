@@ -5,8 +5,8 @@ import { CodeMirror } from '../../../src';
 // Example implementation
 const Example = () => {
     const [value, setValue] = useState({
-        "lame": false,
-        "nasty": "yes"
+        lame: false,
+        nasty: 'yes'
     });
 
     return (
@@ -22,8 +22,8 @@ const code = `
 
     const Example = () => {
         const [value, setValue] = useState({
-            "lame": false,
-            "nasty": "yes"
+            lame: false,
+            nasty: 'yes'
         });
 
         return (
@@ -37,7 +37,7 @@ const code = `
 
 // Component props
 const properties = [
-    {property: 'onChange', description: 'onChange event', type: 'function', default: ''},
+    {property: 'onChange', description: 'onChange event', type: 'function'},
     {property: 'lineNumbers', description: 'Whether to show line numbers to the left of the editor.', type: 'bool', default: 'true'},
     {property: 'indentUnit', description: 'How many spaces a block should be indented', type: 'number', default: '4'},
     {property: 'lineSeparator', description: 'Explicitly set the line separator for the editor', type: 'string', default: '\\n'},

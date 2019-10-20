@@ -34,7 +34,7 @@ export const CodeMirror = forwardRef((props, ref) => {
                 indentUnit,
                 lineSeparator
             }}
-            className={'codemirror-form'}
+            className={'hangar-codemirror-form'}
             value={prettifyJson(value)}
         />
     );
