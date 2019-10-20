@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {Button, Descriptions, Icon} from 'antd';
+import {Button, Divider} from 'antd';
 import { Code, PropertyTable } from './utils';
 import { Display3 } from '../../src';
 import './ComponentDisplay.scss';
@@ -27,18 +27,15 @@ export const ComponentDisplay = ({title, code, properties, description, children
             <Display3>{title}</Display3>
 
             <div className='content'>
-                {
-                    description ?
-                    <Descriptions size='small' style={{marginBottom: 10}} bordered>
-                        <Descriptions.Item label={'Description'}>
-                            {description}
-                        </Descriptions.Item>
-                    </Descriptions>
-                    : null
-                }
                 {children}
             </div>
 
+            { description ?
+                <div className='description'>
+                    <Divider orientation="left">Description</Divider>
+                    <p>{description}</p>
+                </div> : null
+            }
             {
                 code ? <div className='footer'>{renderCodeButton()}</div> : null
             }
@@ -48,12 +45,14 @@ export const ComponentDisplay = ({title, code, properties, description, children
             {
                 properties ? <PropertyTable dataSource={properties}/> : null
             }
+
         </div>
     );
 };
 
 ComponentDisplay.propTypes = {
     title: PropTypes.string,
+    description: PropTypes.string,
     code: PropTypes.string,
     properties: PropTypes.arrayOf(PropTypes.object)
 };

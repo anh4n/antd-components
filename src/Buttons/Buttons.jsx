@@ -74,3 +74,6 @@ export const SettingsButton = ({ icon = 'setting', children = 'Settings', ...res
 export const BasketButton = ({ icon = 'shopping-cart', children = 'Add To Basket', ...restProps }) =>
     <Button icon={icon} {...restProps}>{children}</Button>;
 
+export const UploadButton = ({ icon = 'upload', children = 'Upload', ...restProps }) =>
+    <Button icon={icon} {...restProps}>{children}</Button>;
+
