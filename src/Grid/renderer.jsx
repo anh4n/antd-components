@@ -3,7 +3,7 @@ import Switch from 'antd/lib/switch';
 import Popover from 'antd/lib/popover';
 import Input from 'antd/lib/input';
 import Form from 'antd/lib/form';
-import { Editor, CodeMirror } from '../../src';
+import { Editor, CodeMirror, ListField } from '../../src';
 
 export const getDisplay = (fieldType, record, dataIndex, children, maxLength) => {
     if (fieldType === 'boolean') {
@@ -51,6 +51,22 @@ export const getDisplay = (fieldType, record, dataIndex, children, maxLength) =>
         );
     }
 
+    if (fieldType === 'list') {
+        const content = (
+            <pre className="language-bash">
+                {JSON.stringify(record, null, 2)}
+            </pre>
+        );
+
+        return (
+            <Popover content={content} title={dataIndex}>
+                <span style={{ cursor: 'pointer', textDecoration: 'underline' }}>
+                    list
+                </span>
+            </Popover>
+        );
+    }
+
     if (fieldType === 'string') {
         if (record.length > maxLength) {
             return record.substring(0, maxLength) + '...';
@@ -89,6 +105,12 @@ export const renderForm = (props, columns) => {
                 return (
                     <Form.Item label={title}>
                         {getFieldDecorator(dataIndex)(<CodeMirror/>)}
+                    </Form.Item>
+                );
+            case 'list':
+                return (
+                    <Form.Item label={title}>
+                        {getFieldDecorator(dataIndex)(<ListField/>)}
                     </Form.Item>
                 );
             default:

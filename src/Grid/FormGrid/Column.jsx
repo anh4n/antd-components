@@ -39,6 +39,6 @@ Column.defaultProps = {
 
 Column.propTypes = {
     dataIndex: PropTypes.string,
-    fieldType: PropTypes.oneOf(['string', 'object', 'boolean', 'image', 'html']),
+    fieldType: PropTypes.oneOf(['string', 'object', 'boolean', 'image', 'html', 'list']),
 };
 

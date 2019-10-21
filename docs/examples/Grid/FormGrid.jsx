@@ -3,7 +3,6 @@ import {FormGrid} from '../../../src';
 import {Column} from "../../../src/Grid/FormGrid";
 import {ComponentDisplay} from "../../components/ComponentDisplay";
 import {message} from "antd";
-import Form from "antd/lib/form";
 
 const data = [
     {
@@ -17,6 +16,11 @@ const data = [
             lame: false,
             nasty: 'yes'
         },
+        list: [
+            'foo',
+            'bar',
+            'test'
+        ],
         active: true
     },
     {
@@ -30,6 +34,11 @@ const data = [
             dope: true,
             crazy: 'yes'
         },
+        list: [
+            'foo 2',
+            'bar 2',
+            'test 2'
+        ],
         active: true
     },
     {
@@ -43,6 +52,11 @@ const data = [
             amazing: true,
             fancy: 'yes'
         },
+        list: [
+            'foo 3',
+            'bar 3',
+            'test 3'
+        ],
         active: false
     }
 ];
@@ -72,6 +86,7 @@ const Example = () => (
         <Column title={'Content'} dataIndex={'html'} fieldType={'html'}/>
         <Column title={'Image'} dataIndex={'image'} fieldType={'image'}/>
         <Column title={'Settings'} dataIndex={'settings'} fieldType={'object'}/>
+        <Column title={'List'} dataIndex={'list'} fieldType={'list'}/>
         <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
     </FormGrid>
 );
