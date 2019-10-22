@@ -1,5 +1,6 @@
 import React from 'react';
 import AntdButton from 'antd/lib/button/button';
+import AntIcon from 'antd/lib/icon';
 import invert from 'invert-color';
 import styled from 'styled-components';
 import './Buttons.scss';
@@ -37,6 +38,19 @@ export const Button = (props) => {
         );
     }
 };
+
+export const IconButton = styled(AntIcon)`
+    &:hover {
+      color: #3c3c3c;  
+    }
+    cursor: pointer;
+    color: #727272;
+    position: relative;
+    top: 4px;
+    font-size: 24px;
+    transition: all 0.3s;
+    margin-left: 8px;
+`;
 
 export const AddButton = ({ icon = 'plus', children = 'Add', ...restProps }) =>
     <Button icon={icon} {...restProps}>{children}</Button>;

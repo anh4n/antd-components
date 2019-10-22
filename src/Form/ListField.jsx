@@ -1,26 +1,8 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form, Icon, Input } from 'antd';
-import styled from 'styled-components';
+import { Form, Input } from 'antd';
 import nanoid from 'nanoid';
-import { emptyFn } from '../../src';
-
-const AddButton = styled(Button)`
-    width: 100%;
-`;
-
-const DeleteButton = styled(Icon)`
-    &:hover {
-      color: #777;
-    }
-    cursor: pointer;
-    position: relative;
-    top: 4px;
-    font-size: 24px;
-    color: #999;
-    transition: all 0.3s;
-    margin-left: 8px;
-`;
+import { emptyFn, IconButton, AddButton } from '../../src';
 
 export const ListField = forwardRef((props, ref) => {
     const { addText, label, onChange, value = [] } = props;
@@ -67,7 +49,7 @@ export const ListField = forwardRef((props, ref) => {
             <div style={{ display: 'flex' }}>
                 <Input value={value} onChange={onInputChange.bind(null, key)}/>
                 {store.length > 1 ? (
-                    <DeleteButton
+                    <IconButton
                         type="minus-circle-o"
                         onClick={() => remove(key)}
                     />
@@ -80,8 +62,8 @@ export const ListField = forwardRef((props, ref) => {
         <div ref={ref}>
             {formItems}
             <Form.Item>
-                <AddButton type="dashed" onClick={add}>
-                    <Icon type="plus"/> {addText}
+                <AddButton style={{width: '100%'}} type="dashed" onClick={add}>
+                    {addText}
                 </AddButton>
             </Form.Item>
         </div>
