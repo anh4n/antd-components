@@ -4,6 +4,7 @@ import Popover from 'antd/lib/popover';
 import Input from 'antd/lib/input';
 import Form from 'antd/lib/form';
 import { Editor, CodeMirror, ListField } from '../../src';
+import { truncateText } from '../helper';
 
 export const getDisplay = (fieldType, record, dataIndex, children, maxLength) => {
     if (fieldType === 'boolean') {
@@ -68,9 +69,7 @@ export const getDisplay = (fieldType, record, dataIndex, children, maxLength) =>
     }
 
     if (fieldType === 'string') {
-        if (record.length > maxLength) {
-            return record.substring(0, maxLength) + '...';
-        }
+        return truncateText(record, maxLength);
     }
 
     return children;
