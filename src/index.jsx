@@ -6,4 +6,4 @@ export * from './Display';
 export * from './Buttons/Buttons';
 export * from './helper';
 export * from './Locales'
-export * from './LocalContext'
+export * from './LocaleContext'

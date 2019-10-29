@@ -5,7 +5,7 @@ import { emptyFn } from '.';
 export const DEFAULT_LOCALE = 'en_US';
 
 export const LocaleContext = React.createContext({
-    locale: 'en_US',
+    locale: DEFAULT_LOCALE,
     setLocale: emptyFn,
 });
 
