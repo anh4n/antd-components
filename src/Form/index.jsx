@@ -1,3 +1,4 @@
+export * from './withForm';
 export * from './CodeMirror';
 export * from './ListField';
 export * from './Editor';

@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { message, Form } from 'antd';
+import { message } from 'antd';
 import { BaseGrid, EditableContext } from '../BaseGrid';
-import { IconButton, emptyFn } from '../..';
+import { IconButton, emptyFn, withForm } from '../..';
 
 /**
  * @return {React.Component}
  *
  * @constructor
  */
-export const DataGrid = Form.create()((props) => {
+export const DataGrid = withForm((props) => {
     const { idProperty, onAdd, onEdit, onSave, form, children, ...restProps } = props;
     const [isEditing, setEditing] = useState(false);
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
