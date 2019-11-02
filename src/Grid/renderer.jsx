@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { Popover, Switch, Input, InputNumber } from 'antd';
-import { FormItem, Editor, CodeMirror, ListField, Upload, prettifyJson, truncateText, l10n } from '..';
+import { FormItem, Editor, CodeMirror, ListField, Upload, prettifyJson, truncateText, useL10n as l10n } from '..';
 
 const Link = styled.span`
     cursor: pointer;

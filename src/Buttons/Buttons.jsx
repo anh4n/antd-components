@@ -3,8 +3,8 @@ import AntdButton from 'antd/lib/button/button';
 import AntIcon from 'antd/lib/icon';
 import invert from 'invert-color';
 import styled from 'styled-components';
-import { l10n } from '..';
 import PropTypes from 'prop-types';
+import { useL10n as l10n } from '..';
 
 const isHexCode = (color) => (/^#([0-9A-F]{3}){1,2}$/i.test(color));
 
