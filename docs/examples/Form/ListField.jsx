@@ -14,7 +14,6 @@ const Example = () => {
         <ListField
             value={value}
             onChange={v => setValue(v)}
-            addText='Add new field'
         />
     );
 };
@@ -31,7 +30,6 @@ const code = `
         <ListField
             value={value}
             onChange={v => setValue(v)}
-            addText='Add new field'
         />
     );
 

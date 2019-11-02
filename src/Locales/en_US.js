@@ -15,6 +15,7 @@ module.exports = {
         uploadButton: 'Upload'
     },
     Form: {
-        moreText: 'more'
+        moreText: 'more',
+        addNewField: 'Add field'
     }
 };

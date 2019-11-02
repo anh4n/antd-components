@@ -15,6 +15,7 @@ module.exports = {
         uploadButton: 'отпреми'
     },
     Form: {
-        moreText: 'више'
+        moreText: 'више',
+        addNewField: 'Додај поље'
     }
 };

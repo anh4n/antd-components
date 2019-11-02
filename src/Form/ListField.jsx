@@ -2,10 +2,10 @@ import React, { forwardRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input } from 'antd';
 import nanoid from 'nanoid';
-import { emptyFn, IconButton, AddButton } from '..';
+import { emptyFn, IconButton, AddButton, useL10n as l10n } from '..';
 
 export const ListField = forwardRef((props, ref) => {
-    const { addText, label, onChange, value = [] } = props;
+    const { addText = l10n().Form.addNewField, label, onChange, value = [] } = props;
 
     const initialState = value.map(v => ({ key: nanoid(10), value: v }));
     const [store, setStore] = useState(initialState);
@@ -71,7 +71,6 @@ export const ListField = forwardRef((props, ref) => {
 });
 
 ListField.defaultProps = {
-    addText: 'Add field',
     onChange: emptyFn
 };
 
