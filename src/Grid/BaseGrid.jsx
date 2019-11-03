@@ -158,6 +158,7 @@ export const BaseGrid = (props) => {
 };
 
 BaseGrid.defaultProps = {
+    children: [],
     idProperty: 'id',
     extraColumns: [],
     onAdd: (record) => (record),
