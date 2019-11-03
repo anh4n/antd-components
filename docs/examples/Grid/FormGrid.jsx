@@ -3,71 +3,28 @@ import faker from 'faker';
 import { message } from 'antd';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
 import { FormGrid, Column } from '../../../src';
+import nanoid from 'nanoid';
+import { generateFakeDataArray, generateFakeList, generateFakeObject } from '../../components/utils';
 
-const defaultData = [
-    {
-        _id: 1,
-        text: 'You can adjust types',
-        html: '<div style="background-color: #eee; color: #D20000">this is renderd html</div>',
-        image: [
-            {
-                name: 'write.jpg',
-                url: 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593357_960_720.jpg'
-            },
-            {
-                name: 'note.jpg',
-                url: 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593358_960_720.jpg'
-            }],
-        settings: {
-            lame: false,
-            nasty: 'yes'
-        },
-        list: [
-            'foo',
-            'bar',
-            'test'
-        ],
-        active: true
-    },
-    {
-        _id: 2,
-        text: 'for example string',
-        html: '<div style="background-color: #000; color: #fff">this is renderd html</div>',
-        image: {
-            name: 'note.jpg',
-            url: 'https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593358_960_720.jpg'
-        },
-        settings: {
-            dope: true,
-            crazy: 'yes'
-        },
-        list: [
-            'foo 2',
-            'bar 2',
-            'test 2'
-        ],
-        active: true
-    },
-    {
-        _id: 3,
-        text: 'it will be shortened if its to long',
-        html: '<div style="background-color: #fff; color: #000">this is renderd html</div>',
-        image: {
-            name: 'working.jpg',
-            url: 'https://cdn.pixabay.com/photo/2015/07/17/22/42/startup-849805_960_720.jpg'
-        },
-        settings: {
-            amazing: true,
-            fancy: 'yes'
-        },
-        list: [
-            'foo 3',
-            'bar 3',
-            'test 3'
-        ],
-        active: false
-    }
-];
+const generateImages = () => {
+    const len = faker.random.number({ min: 1, max: 5 });
+    return generateFakeDataArray(len, () => ({
+        name: faker.system.commonFileName(),
+        url: `http://lorempixel.com/225/150/food/${faker.random.word()}`
+    }));
+};
+
+const generateFakeData = () => ({
+    _id: nanoid(10),
+    text: faker.commerce.productName(),
+    html: `<div style="color: ${faker.internet.color()}">${faker.lorem.words()}</div>`,
+    image: generateImages(),
+    settings: generateFakeObject(),
+    list: generateFakeList(),
+    active: faker.random.boolean()
+});
+
+const defaultData = generateFakeDataArray(5, generateFakeData);
 
 const Example = () => {
     const [data, setData] = useState(defaultData);

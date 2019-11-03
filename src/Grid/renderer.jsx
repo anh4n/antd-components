@@ -10,7 +10,7 @@ const Link = styled.span`
 
 const CodeSnippet = ({ html, link, children }) => {
     const content = (
-        <pre className="language-bash">
+        <pre style={{ margin: 0 }}>
             {html ? <div dangerouslySetInnerHTML={{ __html: children }}/> : children}
         </pre>
     );
@@ -33,7 +33,9 @@ const ImagePreview = ({ data }) => {
     if (Array.isArray(data) && data.length > 0) {
         url = data[0].url;
         title = data[0].name;
-        MoreLink = <span style={{ paddingLeft: '5px' }}>({data.length - 1} {l10n().Form.moreText})</span>;
+        if (data.length > 1) {
+            MoreLink = <span style={{ paddingLeft: '5px' }}>({data.length - 1} {l10n().Form.moreText})</span>;
+        }
     } else {
         url = data.url;
         title = data.name;

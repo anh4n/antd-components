@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Col } from 'antd';
 import { PrismCode } from 'react-prism';
 import Normalizer from 'prismjs/plugins/normalize-whitespace/prism-normalize-whitespace';
+import faker from 'faker';
 
 export * from './PropertyTable';
 
@@ -33,7 +34,7 @@ export const normalizeWhitespace = new Normalizer({
     'right-trim': true
 });
 
-export const Code = ({children, ...props}) => (
+export const Code = ({ children, ...props }) => (
     <StyledPrismCode component="pre" className="language-jsx" {...props}>
         {normalizeWhitespace.normalize(children)}
     </StyledPrismCode>
@@ -47,4 +48,26 @@ export const generateFakeDataArray = (count, func) => {
     }
 
     return data;
+};
+
+export const generateFakeObject = (min = 3, max = 10) => {
+    const len = faker.random.number({ min, max });
+    let obj = {};
+
+    for (let i = 0; i < len; i++) {
+        obj[faker.lorem.word()] = faker.lorem.words();
+    }
+
+    return obj;
+};
+
+export const generateFakeList = (min = 3, max = 10) => {
+    const len = faker.random.number({ min, max });
+    let list = [];
+
+    for (let i = 0; i < len; i++) {
+        list.push(faker.lorem.words());
+    }
+
+    return list;
 };
