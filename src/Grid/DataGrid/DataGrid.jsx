@@ -103,6 +103,7 @@ DataGrid.defaultProps = {
 };
 
 DataGrid.propTypes = {
+    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element]),
     dataSource: PropTypes.array,
     idProperty: PropTypes.string,
     onAdd: PropTypes.func,
