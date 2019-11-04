@@ -10,7 +10,7 @@ const generateImages = () => {
     const len = faker.random.number({ min: 1, max: 5 });
     return generateFakeDataArray(len, () => ({
         name: faker.system.commonFileName(),
-        url: `http://lorempixel.com/225/150/food/${faker.random.word()}`
+        url: `http://picsum.photos/seed/${faker.lorem.word()}/225/150`
     }));
 };
 
