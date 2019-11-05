@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import { Popover, Switch, Input, InputNumber } from 'antd';
+import { Popover, Switch, Input, InputNumber, Icon } from 'antd';
 import { FormItem, Editor, CodeMirror, ListField, Upload, prettifyJson, truncateText, useL10n as l10n } from '..';
 
 const Link = styled.span`
@@ -26,11 +26,11 @@ const ImagePreview = ({ data }) => {
     let url, title;
     let MoreLink = null;
 
-    if (!data) {
-        return null;
+    if (!data || Array.isArray(data) && data.length === 0) {
+        return <Icon type={'picture'} style={{fontSize: '40px'}} />;
     }
 
-    if (Array.isArray(data) && data.length > 0) {
+    if (Array.isArray(data)) {
         url = data[0].url;
         title = data[0].name;
         if (data.length > 1) {

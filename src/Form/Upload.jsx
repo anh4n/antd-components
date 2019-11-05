@@ -69,7 +69,7 @@ export const Upload = forwardRef((props, ref) => {
 
     const onChangeData = info => {
 
-        onChange(info);
+        onChange(info.fileList);
 
         if (info.file.status === 'uploading') {
             return;
