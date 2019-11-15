@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input, InputNumber, Switch } from 'antd';
-import { Upload } from './Upload';
-import { Editor } from './Editor';
-import { CodeMirror } from './CodeMirror';
-import { ListField } from './ListField';
+import { Upload, Editor, CodeMirror, ListField, Select } from '..';
 
 const getInput = (fieldType, fieldProps = {}) => {
     switch (fieldType) {
@@ -20,6 +17,8 @@ const getInput = (fieldType, fieldProps = {}) => {
             return (<ListField/>);
         case 'number':
             return (<InputNumber/>);
+        case 'select':
+            return (<Select {...fieldProps}/>);
         case 'string':
         default:
             return (<Input/>);
@@ -85,7 +84,7 @@ FormItem.defaultProps = {
 FormItem.propTypes = {
     dataIndex: PropTypes.string.isRequired,
     fieldProps: PropTypes.object,
-    fieldType: PropTypes.oneOf(['boolean', 'image', 'html', 'object', 'list', 'number', 'string']),
+    fieldType: PropTypes.oneOf(['boolean', 'image', 'html', 'object', 'list', 'number', 'string', 'select']),
     form: PropTypes.object,
     initialValue: PropTypes.any,
     required: PropTypes.bool,
