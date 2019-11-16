@@ -9,13 +9,15 @@ const hasErrors = (fieldsError) => {
 };
 
 const AntdFormWrapper = withForm((props) => {
-    const {record, onSubmit, disableSaveButtonOnError, children, form} = props;
-    const {getFieldsError} = form;
+    const { record, onSubmit, disableSaveButtonOnError, children, form } = props;
+    const { getFieldsError } = form;
 
     const formValidationError = l10n().Validation.form;
 
     useEffect(() => {
-        form.validateFields();
+        if (disableSaveButtonOnError) {
+            form.validateFields();
+        }
     }, []);
 
     const onHandleSubmit = (e) => {
@@ -42,7 +44,7 @@ const AntdFormWrapper = withForm((props) => {
 
         if ('FormItem' === child.type.displayName) {
             return (
-                <FormItem {...child.props} form={form}/>
+                <FormItem {...child.props} form={form} disableInitialError={disableSaveButtonOnError}/>
             );
         } else {
             return child;
@@ -54,7 +56,7 @@ const AntdFormWrapper = withForm((props) => {
             {formItems}
         </AntdForm>
     );
-}, {mapProps: true });
+}, { mapProps: true });
 
 /**
  * @return {React.Component}

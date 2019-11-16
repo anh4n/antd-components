@@ -42,20 +42,39 @@ const getValuePropName = (fieldType) => {
  * @constructor
  */
 export const FormItem = (props) => {
-    const { fieldType, fieldProps, title, dataIndex, form, valuePropName, required, initialValue, children, ...restProps } = props;
+    const {
+        fieldType,
+        fieldProps,
+        title,
+        dataIndex,
+        form,
+        valuePropName,
+        required,
+        initialValue,
+        disableInitialError,
+        children,
+        ...restProps
+    } = props;
     const { getFieldDecorator, isFieldTouched, getFieldError } = form;
     const rules = [
         { required },
         ...props.rules
     ];
 
-    const validateStatus = isFieldTouched(dataIndex) && getFieldError(dataIndex);
+    let statusProps = {};
+
+    if (disableInitialError) {
+        const validateStatus = isFieldTouched(dataIndex) && getFieldError(dataIndex);
+        statusProps = {
+            validateStatus: validateStatus ? 'error' : '',
+            help: validateStatus || ''
+        };
+    }
 
     return (
         <Form.Item
             label={title}
-            validateStatus={validateStatus ? 'error' : ''}
-            help={validateStatus || ''}
+            {...statusProps}
             {...restProps}
         >
             {
@@ -75,6 +94,7 @@ export const FormItem = (props) => {
 };
 
 FormItem.defaultProps = {
+    disableInitialError: false,
     fieldProps: {},
     fieldType: 'string',
     required: false,
@@ -83,6 +103,7 @@ FormItem.defaultProps = {
 
 FormItem.propTypes = {
     dataIndex: PropTypes.string.isRequired,
+    disableInitialError: PropTypes.bool,
     fieldProps: PropTypes.object,
     fieldType: PropTypes.oneOf(['boolean', 'image', 'html', 'object', 'list', 'number', 'string', 'select']),
     form: PropTypes.object,
