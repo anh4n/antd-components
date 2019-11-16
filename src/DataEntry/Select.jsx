@@ -25,7 +25,7 @@ export const Select = forwardRef((props, ref) => {
     const { options, ...restProps } = props;
 
     return (
-        <AntdSelect ref={ref} {...restProps}>
+        <AntdSelect ref={ref} style={{ width: '100%' }} {...restProps}>
             {renderOptions(options)}
         </AntdSelect>
     );

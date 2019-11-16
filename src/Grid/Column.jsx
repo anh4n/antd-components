@@ -54,7 +54,7 @@ export const Column = (props) => {
 
     return (
         <td {...restProps}>
-            {getDisplay({ children, fieldType, maxLength, value })}
+            {getDisplay({ children, fieldType, maxLength, value, fieldProps })}
         </td>
     );
 };
@@ -70,7 +70,7 @@ Column.propTypes = {
     dataIndex: PropTypes.string,
     editable: PropTypes.bool,
     fieldProps: PropTypes.object,
-    fieldType: PropTypes.oneOf(['string', 'number', 'object', 'boolean', 'image', 'html', 'list']),
+    fieldType: PropTypes.oneOf(['string', 'number', 'object', 'boolean', 'image', 'html', 'list', 'select']),
     isEditing: PropTypes.bool,
     maxLength: PropTypes.number,
     record: PropTypes.object,

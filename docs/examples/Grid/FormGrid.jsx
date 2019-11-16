@@ -8,6 +8,7 @@ import { generateFakeDataArray, generateFakeList, generateFakeObject, generateIm
 
 const generateFakeData = () => ({
     _id: nanoid(10),
+    salutation: faker.helpers.randomize(['mr', 'mrs']),
     text: faker.commerce.productName(),
     html: `<span style="color: ${faker.internet.color()}">${faker.lorem.words()}</span>`,
     image: generateImages(),
@@ -15,6 +16,11 @@ const generateFakeData = () => ({
     list: generateFakeList(),
     active: faker.random.boolean()
 });
+
+const options = [
+    {label: 'Mr', value: 'mr'},
+    {label: 'Mrs', value: 'mrs'}
+];
 
 const defaultData = generateFakeDataArray(5, generateFakeData);
 
@@ -72,6 +78,7 @@ const Example = () => {
             onSave={onSave}
             idProperty={'_id'}
         >
+            <Column title={'Salutation'} dataIndex={'salutation'} fieldType={'select'} fieldProps={{ options }} required/>
             <Column title={'Title'} dataIndex={'text'} fieldType={'string'} required maxLength={30}/>
             <Column title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
             <Column title={'Image'} dataIndex={'image'} fieldType={'image'} fieldProps={imageConfig}/>
@@ -88,6 +95,11 @@ const code = `
     import React, { useState } from 'react';
     import { FormGrid, Column } from '@react-hangar/antd-components'
 
+    const options = [
+        {label: 'Mr', value: 'mr'},
+        {label: 'Mrs', value: 'mrs'}
+    ];
+    
     const defaultData = [
         {
             _id: 1,
@@ -196,6 +208,7 @@ const code = `
                 onSave={onSave}
                 idProperty={'_id'}
             >
+                <Column title={'Salutation'} dataIndex={'salutation'} fieldType={'select'} fieldProps={{ options }} required/>
                 <Column title={'Title'} dataIndex={'text'} fieldType={'string'} required maxLength={30}/>
                 <Column title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
                 <Column title={'Image'} dataIndex={'image'} fieldType={'image'} fieldProps={imageConfig}/>

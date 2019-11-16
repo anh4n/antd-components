@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
+import { message } from 'antd';
+import nanoid from 'nanoid';
 import faker from 'faker';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
-import { DataGrid } from '../../../src';
 import { generateFakeDataArray } from '../../components/utils';
-import nanoid from 'nanoid';
-import { message } from 'antd';
-import {Column} from "../../../src/Grid";
+import { DataGrid, Column } from '../../../src';
 
 const generateFakeData = () => ({
     id: nanoid(10),
+    salutation: faker.helpers.randomize(['mr', 'mrs']),
     name: faker.name.findName(),
     age: faker.random.number({ min: 10, max: 99 }),
     active: faker.random.boolean()
 });
 
 const defaultData = generateFakeDataArray(5, generateFakeData);
+
+const options = [
+    {label: 'Mr', value: 'mr'},
+    {label: 'Mrs', value: 'mrs'}
+];
 
 // Example implementation
 const Example = () => {
@@ -61,6 +66,7 @@ const Example = () => {
             onDelete={onDelete}
             onSave={onSave}
         >
+            <Column title={'Salutation'} dataIndex={'salutation'} fieldType={'select'} fieldProps={{ options }} required/>
             <Column title={'Name'} dataIndex={'name'} fieldType={'string'} required/>
             <Column title={'Age'} dataIndex={'age'} fieldType={'number'}/>
             <Column title={'Active'} dataIndex={'active'} fieldType={'boolean'}/>
@@ -73,6 +79,11 @@ const Example = () => {
 const code = `
     import React, { useState } from 'react';
     import { DataGrid, Column } from '@react-hangar/antd-components';
+
+    const options = [
+        {label: 'Mr', value: 'mr'},
+        {label: 'Mrs', value: 'mrs'}
+    ];
 
     const defaultData = [
         {
@@ -125,6 +136,7 @@ const code = `
                 onDelete={onDelete}
                 onSave={onSave}
             >
+                <Column title={'Salutation'} dataIndex={'salutation'} fieldType={'select'} fieldProps={{ options }} required/>
                 <Column title={'Name'} dataIndex={'name'} fieldType={'string'} required/>
                 <Column title={'Age'} dataIndex={'age'} inputType={'number'}/>
                 <Column title={'Active'} dataIndex={'active'} inputType={'switch'}/>

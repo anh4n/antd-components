@@ -53,7 +53,7 @@ const ImagePreview = ({ data }) => {
     );
 };
 
-export const getDisplay = ({ children, fieldType, maxLength, value }) => {
+export const getDisplay = ({ children, fieldType, maxLength, value, fieldProps = {} }) => {
     switch (fieldType) {
         case 'boolean':
             return (<Switch disabled={true} checked={value}/>);
@@ -69,6 +69,8 @@ export const getDisplay = ({ children, fieldType, maxLength, value }) => {
             return truncateText(value, maxLength);
         case 'number':
             return value;
+        case 'select':
+            return fieldProps.options.find(o => o.value === value).label; // get label for value
         default:
             return children;
     }
