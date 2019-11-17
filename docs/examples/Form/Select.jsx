@@ -73,15 +73,25 @@ const Example = () => {
 // Code example
 // language=JS
 const code = `
-    import React, {Fragment} from 'react';
+    import React, { Fragment } from 'react';
     import { Select } from '@react-hangar/antd-components';
 
     const options = [
-        {label: 'Unbranded Metal Keyboard', value: 1},  
-        {label: 'Small Soft Table', value: 2},  
-        {label: 'Ergonomic Concrete Mouse', value: 3}  
+        { label: 'Unbranded Metal Keyboard', value: 1 },
+        { label: 'Small Soft Table', value: 2 },
+        { label: 'Ergonomic Concrete Mouse', value: 3 },
+        {
+            group: {
+                label: 'Group1',
+                options: [
+                    { label: 'Incredible Steel Sausages', value: 4 },
+                    { label: 'Sleek Granite Pants', value: 5 },
+                    { label: 'Handmade Plastic Chicken', value: 6 },
+                ]
+            }
+        }
     ];
-    
+
     return (
         <Fragment>
             <div>
@@ -101,7 +111,10 @@ const code = `
                     onChange={v => console.log(v)}
                     render={(label, value) =>
                         <Fragment>
-                            <small>Label: </small>{label}<small> | Value: </small>{value}
+                            <small>Label:</small>
+                            {label}
+                            <small>| Value:</small>
+                            {value}
                         </Fragment>
                     }
                 />
