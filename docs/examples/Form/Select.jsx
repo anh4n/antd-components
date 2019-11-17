@@ -1,14 +1,15 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
 import { Select } from '../../../src';
 import faker from 'faker';
 
 const generateOption = () => {
-    const v = faker.commerce.productName();
+    const label = faker.commerce.productName();
+    const value = faker.random.number();
 
     return ({
-        label: v,
-        value: v
+        label,
+        value
     });
 };
 
@@ -45,17 +46,24 @@ const Example = () => {
         <Fragment>
             <div>
                 <Select
-                    style={{ marginBottom: '15px', width: '300px' }}
+                    style={{ marginBottom: '15px' }}
                     options={options}
                     placeholder={'--- Please Select ---'}
+                    onChange={v => console.log(v)}
                 />
             </div>
             <div>
                 <Select
                     showSearch
-                    style={{ marginBottom: '15px', width: '300px' }}
+                    style={{ marginBottom: '15px' }}
                     value={options[1].value}
                     options={options}
+                    onChange={v => console.log(v)}
+                    render={(label, value) =>
+                        <Fragment>
+                            <small>Label: </small>{label}<small> | Value: </small>{value}
+                        </Fragment>
+                    }
                 />
             </div>
         </Fragment>
@@ -65,16 +73,40 @@ const Example = () => {
 // Code example
 // language=JS
 const code = `
-    import React from 'react';
+    import React, {Fragment} from 'react';
     import { Select } from '@react-hangar/antd-components';
 
-    const [value, setValue] = useState(getFakeData());
-
+    const options = [
+        {label: 'Unbranded Metal Keyboard', value: 1},  
+        {label: 'Small Soft Table', value: 2},  
+        {label: 'Ergonomic Concrete Mouse', value: 3}  
+    ];
+    
     return (
-        <Select
-            value={value}
-            onChange={v => setValue(v)}
-        />
+        <Fragment>
+            <div>
+                <Select
+                    style={{ marginBottom: '15px' }}
+                    options={options}
+                    placeholder={'--- Please Select ---'}
+                    onChange={v => console.log(v)}
+                />
+            </div>
+            <div>
+                <Select
+                    showSearch
+                    style={{ marginBottom: '15px' }}
+                    value={options[1].value}
+                    options={options}
+                    onChange={v => console.log(v)}
+                    render={(label, value) =>
+                        <Fragment>
+                            <small>Label: </small>{label}<small> | Value: </small>{value}
+                        </Fragment>
+                    }
+                />
+            </div>
+        </Fragment>
     );
 
     export default Example;

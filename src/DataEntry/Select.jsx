@@ -5,43 +5,52 @@ import nanoid from 'nanoid';
 
 const { Option, OptGroup } = AntdSelect;
 
-const renderOptions = (options) => {
+const renderOptions = (options, render) => {
     return options.map(option => {
-        const {group, label, value, disabled} = option;
+        const { group, label, value, disabled } = option;
 
         if (group) {
             return (
                 <OptGroup key={nanoid(10)} label={group.label}>
-                    {renderOptions(group.options)}
+                    {renderOptions(group.options, render)}
                 </OptGroup>
             );
         }
 
-        return (<Option key={nanoid(10)} value={value} disabled={disabled}>{label}</Option>);
+        return (<Option key={nanoid(10)} value={value} disabled={disabled}>{render(label, value)}</Option>);
     });
 };
 
 export const Select = forwardRef((props, ref) => {
-    const { options, ...restProps } = props;
+    const { options, render, style, ...restProps } = props;
+
+    const styles = {
+        width: '100%',
+        ...style
+    };
 
     return (
-        <AntdSelect ref={ref} style={{ width: '100%' }} {...restProps}>
-            {renderOptions(options)}
+        <AntdSelect ref={ref} style={styles} {...restProps}>
+            {renderOptions(options, render)}
         </AntdSelect>
     );
 });
 
 Select.defaultProps = {
-    options: []
+    options: [],
+    render: label => label,
+    style: {}
 };
 
 Select.propTypes = {
     options: PropTypes.arrayOf(
         PropTypes.shape({
+            disabled: PropTypes.bool,
             label: PropTypes.string,
-            value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-            disabled: PropTypes.bool
+            value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
         })
     ),
-    showSearch: PropTypes.bool
+    render: PropTypes.func,
+    showSearch: PropTypes.bool,
+    style: PropTypes.object
 };
