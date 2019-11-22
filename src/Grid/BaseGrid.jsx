@@ -69,6 +69,8 @@ export const BaseGrid = (props) => {
     }
 
     const columns = React.Children.map(children, child => {
+        if (child.props.hideInGrid) return null;
+
         return {
             title: child.props.title,
             dataIndex: child.props.dataIndex,

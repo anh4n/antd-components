@@ -17,6 +17,7 @@ export const Column = (props) => {
         editable,
         fieldProps,
         fieldType,
+        hideInGrid,
         isEditing,
         maxLength,
         record,
@@ -62,6 +63,8 @@ export const Column = (props) => {
 Column.defaultProps = {
     editable: true,
     fieldType: 'string',
+    fieldProps: {},
+    hideInGrid: false,
     required: false,
     rules: []
 };
@@ -70,7 +73,8 @@ Column.propTypes = {
     dataIndex: PropTypes.string,
     editable: PropTypes.bool,
     fieldProps: PropTypes.object,
-    fieldType: PropTypes.oneOf(['string', 'number', 'object', 'boolean', 'image', 'html', 'list', 'select']),
+    fieldType: PropTypes.oneOf(['boolean', 'image', 'html', 'object', 'list', 'number', 'string', 'select']),
+    hideInGrid: PropTypes.bool,
     isEditing: PropTypes.bool,
     maxLength: PropTypes.number,
     record: PropTypes.object,

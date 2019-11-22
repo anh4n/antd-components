@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { message } from 'antd';
 import nanoid from 'nanoid';
 import faker from 'faker';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
-import { generateFakeDataArray } from '../../components/utils';
+import { Code, generateFakeDataArray } from '../../components/utils';
 import { DataGrid, Column } from '../../../src';
 
 const generateFakeData = () => ({
@@ -157,8 +157,21 @@ const properties = [
     { property: 'onSave', description: 'Function is called on record save', type: 'function' }
 ];
 
+const columnProperties = [
+    {property: 'dataIndex', description: 'Name of record property', type: 'string'},
+    {property: 'editable', description: 'set to true if field should be editable', type: 'bool', default: 'true'},
+    {property: 'fieldProps', description: 'This props will be forwarded to input component', type: 'object', default: '{}'},
+    {property: 'fieldType', description: <span>Can be one of <Code>boolean</Code><Code>image</Code><Code>html</Code><Code>object</Code><Code>list</Code><Code>number</Code><Code>string</Code></span>, type: '', default: 'string'},
+    {property: 'maxLength', description: 'text is cut off after given number of chars (only for string field)', type: 'number'},
+    {property: 'required', description: 'set field as required', type: 'bool', default: 'false'},
+    {property: 'rules', description: 'Add validation rules (see: https://ant.design/components/form/#Validation-Rules)', type: 'array', default: '[]'},
+];
+
 export default () => (
-    <ComponentDisplay title={'DataGrid'} code={code} properties={properties}>
-        <Example/>
-    </ComponentDisplay>
+    <Fragment>
+        <ComponentDisplay title={'DataGrid'} code={code} properties={properties}>
+            <Example/>
+        </ComponentDisplay>
+        <ComponentDisplay title={'Column'} properties={columnProperties}/>
+    </Fragment>
 );

@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import faker from 'faker';
 import { message } from 'antd';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
 import { FormGrid, Column } from '../../../src';
 import nanoid from 'nanoid';
-import { generateFakeDataArray, generateFakeList, generateFakeObject, generateImages } from '../../components/utils';
+import {
+    Code,
+    generateFakeDataArray,
+    generateFakeList,
+    generateFakeObject,
+    generateImages
+} from '../../components/utils';
 
 const generateFakeData = () => ({
     _id: nanoid(10),
@@ -18,8 +24,8 @@ const generateFakeData = () => ({
 });
 
 const options = [
-    {label: 'Mr', value: 'mr'},
-    {label: 'Mrs', value: 'mrs'}
+    { label: 'Mr', value: 'mr' },
+    { label: 'Mrs', value: 'mrs' }
 ];
 
 const defaultData = generateFakeDataArray(5, generateFakeData);
@@ -96,10 +102,10 @@ const code = `
     import { FormGrid, Column } from '@react-hangar/antd-components'
 
     const options = [
-        {label: 'Mr', value: 'mr'},
-        {label: 'Mrs', value: 'mrs'}
+        { label: 'Mr', value: 'mr' },
+        { label: 'Mrs', value: 'mrs' }
     ];
-    
+
     const defaultData = [
         {
             _id: 1,
@@ -208,7 +214,8 @@ const code = `
                 onSave={onSave}
                 idProperty={'_id'}
             >
-                <Column title={'Salutation'} dataIndex={'salutation'} fieldType={'select'} fieldProps={{ options }} required/>
+                <Column title={'Salutation'} dataIndex={'salutation'} fieldType={'select'} fieldProps={{ options }}
+                        required/>
                 <Column title={'Title'} dataIndex={'text'} fieldType={'string'} required maxLength={30}/>
                 <Column title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
                 <Column title={'Image'} dataIndex={'image'} fieldType={'image'} fieldProps={imageConfig}/>
@@ -222,6 +229,16 @@ const code = `
     export default Example;
 `;
 
+const columnProperties = [
+    {property: 'dataIndex', description: 'Name of record property', type: 'string'},
+    {property: 'fieldProps', description: 'This props will be forwarded to input component', type: 'object', default: '{}'},
+    {property: 'fieldType', description: <span>Can be one of <Code>boolean</Code><Code>image</Code><Code>html</Code><Code>object</Code><Code>list</Code><Code>number</Code><Code>string</Code></span>, type: '', default: 'string'},
+    {property: 'hideInGrid', description: 'Hide column in grid but show it in editing form', type: 'bool', default: 'false'},
+    {property: 'maxLength', description: 'text is cut off after given number of chars (only for string field)', type: 'number'},
+    {property: 'required', description: 'set field as required', type: 'bool', default: 'false'},
+    {property: 'rules', description: 'Add validation rules (see: https://ant.design/components/form/#Validation-Rules)', type: 'array', default: '[]'},
+];
+
 // Component props
 const properties = [
     { property: 'dataSource', description: 'data source', type: 'object[]' },
@@ -233,7 +250,10 @@ const properties = [
 ];
 
 export default () => (
-    <ComponentDisplay title={'Form Grid'} code={code} properties={properties}>
-        <Example/>
-    </ComponentDisplay>
+    <Fragment>
+        <ComponentDisplay title={'Form Grid'} code={code} properties={properties}>
+            <Example/>
+        </ComponentDisplay>
+        <ComponentDisplay title={'Column'} properties={columnProperties}/>
+    </Fragment>
 );
