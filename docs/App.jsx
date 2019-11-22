@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import { HashRouter as Router, Switch } from 'react-router-dom';
 import {
     DEFAULT_LOCALE,
+    DEFAULT_THEME,
     LocaleProvider,
+    ThemeProvider,
     Flyout,
-    MotionDrawer
+    MotionDrawer,
+    Logo,
+    Header,
+    renderRoutes
 } from '../src';
 import { Row, Col, Icon, Select } from 'antd';
 import { Wrapper } from './components/utils';
 import { routes } from './routes';
 import { Menu } from './Menu';
-import { renderRoutes } from '../src/Navigation/routing';
-import { Header } from '../src/Header/Header';
-import { Logo } from '../src/Logo/Logo';
-import * as ReactDOM from 'react-dom';
-import {DEFAULT_THEME, ThemeProvider} from '../src/Themes';
 
 /**
  * @return {React.Component}
@@ -70,15 +71,15 @@ export const App = () => {
     ];
 
     let Extra = (
-        <div style={{textAlign: 'right', paddingRight: 5}}>
-            <Select size={'small'} defaultValue={'1.0.0'} >
+        <div style={{ textAlign: 'right', paddingRight: 5 }}>
+            <Select size={'small'} defaultValue={'1.0.0'}>
                 <Select.Option value="1.0.0">V.1.0.0</Select.Option>
             </Select>
-            <Select style={{padding: 5}} size={'small'} value={theme} onChange={onThemeChange}>
+            <Select style={{ padding: 5 }} size={'small'} value={theme} onChange={onThemeChange}>
                 <Select.Option value="light">Light</Select.Option>
                 <Select.Option value="dark">Dark</Select.Option>
             </Select>
-            <Select style={{padding: 5}} size={'small'} value={color} onChange={onColorChange}>
+            <Select style={{ padding: 5 }} size={'small'} value={color} onChange={onColorChange}>
                 <Select.Option value="red">Red</Select.Option>
                 <Select.Option value="default">Blue</Select.Option>
                 <Select.Option value="pink">Pink</Select.Option>
@@ -105,7 +106,7 @@ export const App = () => {
                     <LocaleProvider locale={locale} setLocale={setLocale}>
 
                         <MotionDrawer width={400} open={open} onChange={onChange}>
-                            <Menu />
+                            <Menu/>
                         </MotionDrawer>
 
                         <Row>
@@ -135,8 +136,8 @@ export const App = () => {
                         </Row>
 
                         <Row>
-                            <Col style={{height: '100vh'}} xs={0} md={6} xl={5} xxl={4}>
-                                <Menu />
+                            <Col style={{ height: '100vh' }} xs={0} md={6} xl={5} xxl={4}>
+                                <Menu/>
                             </Col>
                             <Col xs={24} md={18} xl={19} xxl={20}>
                                 <Wrapper className={'markdown-body'}>

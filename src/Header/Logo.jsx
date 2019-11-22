@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { ThemeContext } from '..';
+import { Link } from 'react-router-dom';
 
 export const Logo = (props) => {
     const { children, image, ...restProps } = props;
@@ -9,12 +10,12 @@ export const Logo = (props) => {
 
     return (
         <div className={`${theme} logo`} {...restProps}>
-            <a href="/">
+            <Link to="/">
                 {
                     image ? <div className={'image'}><img src={image}/></div> : null
                 }
                 <div className={'text'}>{children}</div>
-            </a>
+            </Link>
         </div>
     );
 };

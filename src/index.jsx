@@ -6,6 +6,6 @@ export * from './Display';
 export * from './Buttons/Buttons';
 export * from './Navigation';
 export * from './DataEntry';
-export * from './Header/Header';
+export * from './Header';
 export * from './Grid';
 export * from './Drawer/MotionDrawer';
