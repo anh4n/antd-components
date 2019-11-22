@@ -24,7 +24,7 @@ import {DEFAULT_THEME, ThemeProvider} from '../src/Themes';
 export const App = () => {
     const [locale, setLocale] = useState(DEFAULT_LOCALE);
     const [theme, setTheme] = useState(DEFAULT_THEME);
-    const [color, setColor] = useState('red');
+    const [color, setColor] = useState('antd-red');
     const [open, setOpen] = useState(false);
 
     const onLocaleChange = (value) => {
@@ -69,7 +69,7 @@ export const App = () => {
         }
     ];
 
-    let Extra = (
+    const Extra = (
         <div style={{textAlign: 'right', paddingRight: 5}}>
             <Select size={'small'} defaultValue={'1.0.0'} >
                 <Select.Option value="1.0.0">V.1.0.0</Select.Option>
@@ -79,10 +79,10 @@ export const App = () => {
                 <Select.Option value="dark">Dark</Select.Option>
             </Select>
             <Select style={{padding: 5}} size={'small'} value={color} onChange={onColorChange}>
-                <Select.Option value="red">Red</Select.Option>
-                <Select.Option value="default">Blue</Select.Option>
-                <Select.Option value="pink">Pink</Select.Option>
-                <Select.Option value="mint">Mint</Select.Option>
+                <Select.Option value="antd-red">Red</Select.Option>
+                <Select.Option value="antd">Blue</Select.Option>
+                <Select.Option value="antd-pink">Pink</Select.Option>
+                <Select.Option value="antd-mint">Mint</Select.Option>
             </Select>
             <Select size={'small'} value={locale} onChange={onLocaleChange}>
                 <Select.Option value="en_US">English</Select.Option>
@@ -92,14 +92,14 @@ export const App = () => {
         </div>
     );
 
-    let ThemeSwitch = ReactDOM.createPortal(
-        (<link rel="stylesheet" href={`dist/themes/${color}.css`} type="text/css"></link>),
+    const ColorSwitch = ReactDOM.createPortal(
+        (<link rel="stylesheet" href={`dist/${color}.css`} type="text/css"></link>),
         document.head
     );
 
     return (
         <div id={color}>
-            {ThemeSwitch}
+            {ColorSwitch}
             <Router>
                 <ThemeProvider theme={theme} setTheme={setTheme}>
                     <LocaleProvider locale={locale} setLocale={setLocale}>

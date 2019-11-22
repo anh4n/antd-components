@@ -14,9 +14,9 @@
   "repository": "anh4n/antd-components",
   "scripts": {
     "start": "webpack-dev-server",
-    "start-theme": "less-watch-compiler --enable-js src/Themes docs/dist/themes",
-    "build": "babel --delete-dir-on-start src --out-dir lib && less-watch-compiler --enable-js --run-once src lib",
-    "bundle": "webpack --mode=production --colors && less-watch-compiler --enable-js --run-once src/Themes docs/dist/themes",
+    "start-theme": "less-watch-compiler --enable-js styles docs/dist",
+    "build": "babel --delete-dir-on-start src --out-dir lib && less-watch-compiler --run-once src dist && less-watch-compiler --enable-js --run-once styles dist",
+    "bundle": "webpack --mode=production --colors && less-watch-compiler --enable-js --run-once styles docs/dist",
     "test": "jest"
   },
   "dependencies": {

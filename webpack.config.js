@@ -7,7 +7,7 @@ const SRC_DIR = path.resolve(__dirname, 'src');
 module.exports = {
     entry: [
         DOCS_DIR + '/index.jsx',
-        SRC_DIR + '/index.less'
+        SRC_DIR + '/antd-components.less'
     ],
     resolve: {
         extensions: ['.js', '.jsx']
