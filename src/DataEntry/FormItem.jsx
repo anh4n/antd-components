@@ -18,7 +18,7 @@ const getInput = (fieldType, fieldProps = {}) => {
         case 'number':
             return (<InputNumber/>);
         case 'select':
-            return (<Select {...fieldProps}/>);
+            return (<Select style={{ width: '100%' }} {...fieldProps}/>);
         case 'string':
         default:
             return (<Input/>);

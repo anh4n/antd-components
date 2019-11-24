@@ -28,15 +28,10 @@ const renderOptions = (options, render) => {
 };
 
 export const Select = forwardRef((props, ref) => {
-    const { options, render, style, ...restProps } = props;
-
-    const styles = {
-        width: '100%',
-        ...style
-    };
+    const { options, render, ...restProps } = props;
 
     return (
-        <AntdSelect ref={ref} style={styles} {...restProps}>
+        <AntdSelect ref={ref} {...restProps}>
             {renderOptions(options, render)}
         </AntdSelect>
     );
@@ -45,7 +40,6 @@ export const Select = forwardRef((props, ref) => {
 Select.defaultProps = {
     options: [],
     render: label => label,
-    style: {}
 };
 
 Select.propTypes = {

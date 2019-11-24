@@ -10,9 +10,10 @@ import {
     MotionDrawer,
     Logo,
     Header,
-    renderRoutes
+    renderRoutes,
+    Select
 } from '../src';
-import { Row, Col, Icon, Select } from 'antd';
+import { Row, Col } from 'antd';
 import { Wrapper } from './components/utils';
 import { routes } from './routes';
 import { Menu } from './Menu';
@@ -71,25 +72,39 @@ export const App = () => {
     ];
 
     const Extra = (
-        <div style={{textAlign: 'right', paddingRight: 5}}>
-            <Select size={'small'} defaultValue={'1.0.0'} >
-                <Select.Option value="1.0.0">V.1.0.0</Select.Option>
-            </Select>
-            <Select style={{ padding: 5 }} size={'small'} value={theme} onChange={onThemeChange}>
-                <Select.Option value="light">Light</Select.Option>
-                <Select.Option value="dark">Dark</Select.Option>
-            </Select>
-            <Select style={{ padding: 5 }} size={'small'} value={color} onChange={onColorChange}>
-                <Select.Option value="antd-red">Red</Select.Option>
-                <Select.Option value="antd">Blue</Select.Option>
-                <Select.Option value="antd-pink">Pink</Select.Option>
-                <Select.Option value="antd-mint">Mint</Select.Option>
-            </Select>
-            <Select size={'small'} value={locale} onChange={onLocaleChange}>
-                <Select.Option value="en_US">English</Select.Option>
-                <Select.Option value="de_DE">Deutsch</Select.Option>
-                <Select.Option value="sr_RS">Srpski</Select.Option>
-            </Select>
+        <div style={{ textAlign: 'right', paddingRight: 5 }}>
+            <Select
+                style={{ padding: 5 }}
+                size={'small'}
+                value={theme}
+                onChange={onThemeChange}
+                options={[
+                    { label: 'Light', value: 'light' },
+                    { label: 'Dark', value: 'dark' },
+                ]}
+            />
+            <Select
+                style={{ padding: 5 }}
+                size={'small'}
+                value={color}
+                onChange={onColorChange}
+                options={[
+                    { label: 'Red', value: 'antd-red' },
+                    { label: 'Blue', value: 'antd' },
+                    { label: 'Pink', value: 'antd-pink' },
+                    { label: 'Mint', value: 'antd-mint' },
+                ]}
+            />
+            <Select
+                size={'small'}
+                value={locale}
+                onChange={onLocaleChange}
+                options={[
+                    { label: 'English', value: 'en_US' },
+                    { label: 'Deutsch', value: 'de_DE' },
+                    { label: 'Srpski', value: 'sr_RS' },
+                ]}
+            />
         </div>
     );
 
@@ -105,41 +120,25 @@ export const App = () => {
                 <ThemeProvider theme={theme} setTheme={setTheme}>
                     <LocaleProvider locale={locale} setLocale={setLocale}>
 
-                        <MotionDrawer width={400} open={open} onChange={onChange}>
+                        <MotionDrawer width={300} open={open} onChange={onChange}>
                             <Menu/>
                         </MotionDrawer>
 
                         <Row>
-                            <Header>
-                                <Row>
-                                    <Col xs={2} md={0} xl={0} xxl={0}>
-                                        <Icon
-                                            className="burger-icon show-mobile-hide-desktop"
-                                            type='menu'
-                                            onClick={onDrawerBtnClick}
-                                        />
-                                    </Col>
-
-                                    <Col xs={22} md={6} xl={5} xxl={4}>
-                                        <Logo image={`images/logo-${theme}.png`}>React Hangar</Logo>
-                                    </Col>
-
-                                    <Col xs={0} md={10} xl={13} xxl={14}>
-                                        <Flyout routes={headerRoutes} openSubmenus='selected'/>
-                                    </Col>
-
-                                    <Col xs={0} md={8} xl={6} xxl={6}>
-                                        {Extra}
-                                    </Col>
-                                </Row>
-                            </Header>
+                            <Header
+                                logo={<Logo image={`images/logo-${theme}.png`}>React Hangar</Logo>}
+                                menu={<Flyout routes={headerRoutes} openSubmenus='selected'/>}
+                                extra={Extra}
+                                onBurgerClick={onDrawerBtnClick}
+                                version={'v1.0.0'}
+                            />
                         </Row>
 
                         <Row>
-                            <Col style={{ height: '100vh' }} xs={0} md={6} xl={5} xxl={4}>
+                            <Col style={{ height: '100vh' }} xs={0} md={8} xl={5} xxl={4}>
                                 <Menu/>
                             </Col>
-                            <Col xs={24} md={18} xl={19} xxl={20}>
+                            <Col xs={24} md={16} xl={19} xxl={20}>
                                 <Wrapper className={'markdown-body'}>
                                     <Switch>
                                         {renderRoutes(routes)}
