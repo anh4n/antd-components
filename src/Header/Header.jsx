@@ -7,7 +7,17 @@ import { ThemeContext } from '..';
 const { Header: AntdHeader } = Layout;
 
 export const Header = (props) => {
-    const { extra, logo, menu, version, onBurgerClick, children, ...restProps } = props;
+    const {
+        extra,
+        extraBreakpoints,
+        logo,
+        menu,
+        menuBreakpoints,
+        version,
+        onBurgerClick,
+        children,
+        ...restProps
+    } = props;
 
     const { theme } = useContext(ThemeContext);
 
@@ -23,15 +33,17 @@ export const Header = (props) => {
     );
 
     const renderMenu = () => (
-        menu ? <Col xs={0} md={13} xl={12} xxl={13}>{menu}</Col> : null
+        menu ? <Col {...menuBreakpoints}>{menu}</Col> : null
     );
 
     const renderExtra = () => (
-        extra ? <Col xs={0} md={0} xl={6} xxl={6}>{extra}</Col> : null
+        extra ? <Col {...extraBreakpoints}>{extra}</Col> : null
     );
 
     const renderVersion = () => (
-        version ? <Col xs={4} md={3} xl={1} xxl={1}><div className={'version'}>{version}</div></Col> : null
+        version ? <Col xs={4} md={3} xl={1} xxl={1}>
+            <div className={'version'}>{version}</div>
+        </Col> : null
     );
 
     return (
@@ -52,13 +64,17 @@ export const Header = (props) => {
 };
 
 Header.defaultProps = {
-    onBurgerClick: emptyFn
+    onBurgerClick: emptyFn,
+    menuBreakpoints: { xs: 0, md: 13, xl: 12, xxl: 13 },
+    extraBreakpoints: { xs: 0, md: 0, xl: 6, xxl: 6 }
 };
 
 Header.propTypes = {
     extra: PropTypes.element,
+    extraBreakpoints: PropTypes.object,
     logo: PropTypes.element,
     menu: PropTypes.element,
+    menuBreakpoints: PropTypes.object,
     version: PropTypes.string,
     onBurgerClick: PropTypes.func
 };
