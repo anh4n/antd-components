@@ -3,8 +3,15 @@ import PropTypes from 'prop-types';
 import { Col, Icon, Layout, Row } from 'antd';
 import { emptyFn } from '../helper';
 import { ThemeContext } from '..';
+import { sumBreakPoints } from '.';
 
 const { Header: AntdHeader } = Layout;
+
+const BURGER_BREAKPOINTS = { xs: 2, md: 0, xl: 0, xxl: 0 };
+const LOGO_BREAKPOINTS = { xs: 18, md: 8, xl: 5, xxl: 4 };
+const MENU_BREAKPOINTS = { xs: 0, md: 13, xl: 12, xxl: 13 };
+const EXTRA_BREAKPOINTS = { xs: 0, md: 0, xl: 6, xxl: 6 };
+const VERSION_BREAKPOINTS = { xs: 4, md: 3, xl: 1, xxl: 1 };
 
 export const Header = (props) => {
     const {
@@ -13,6 +20,7 @@ export const Header = (props) => {
         logo,
         menu,
         menuBreakpoints,
+        menuPosition,
         version,
         onBurgerClick,
         children,
@@ -21,27 +29,40 @@ export const Header = (props) => {
 
     const { theme } = useContext(ThemeContext);
 
+    let extraBP = extraBreakpoints;
+    let menuBP = menuBreakpoints;
+
+    if (!menu) extraBP = sumBreakPoints(extraBP, menuBP);
+    if (!extra) menuBP = sumBreakPoints(menuBP, extraBP);
+
+    const burgerStyle = {
+        color: theme === 'light' ? '#000' : '#FFF'
+    };
+
+    const menuStyle = {
+        textAlign: menuPosition
+    };
+
     const renderBurgerIcon = () => (
-        logo ?
-            <Col xs={2} md={0} xl={0} xxl={0}>
-                <Icon className='burger-icon' type='menu' onClick={onBurgerClick}/>
-            </Col> : null
+        <Col {...BURGER_BREAKPOINTS}>
+            <Icon className='burger-icon' type='menu' style={burgerStyle} onClick={onBurgerClick}/>
+        </Col>
     );
 
     const renderLogo = () => (
-        logo ? <Col xs={18} md={8} xl={5} xxl={4}>{logo}</Col> : null
+        logo ? <Col {...LOGO_BREAKPOINTS}>{logo}</Col> : null
     );
 
     const renderMenu = () => (
-        menu ? <Col {...menuBreakpoints}>{menu}</Col> : null
+        menu ? <Col {...menuBP} style={menuStyle}>{menu}</Col> : null
     );
 
     const renderExtra = () => (
-        extra ? <Col {...extraBreakpoints}>{extra}</Col> : null
+        extra ? <Col {...extraBP} style={{ textAlign: 'right' }}>{extra}</Col> : null
     );
 
     const renderVersion = () => (
-        version ? <Col xs={4} md={3} xl={1} xxl={1}>
+        version ? <Col {...VERSION_BREAKPOINTS}>
             <div className={'version'}>{version}</div>
         </Col> : null
     );
@@ -65,8 +86,9 @@ export const Header = (props) => {
 
 Header.defaultProps = {
     onBurgerClick: emptyFn,
-    menuBreakpoints: { xs: 0, md: 13, xl: 12, xxl: 13 },
-    extraBreakpoints: { xs: 0, md: 0, xl: 6, xxl: 6 }
+    menuBreakpoints: MENU_BREAKPOINTS,
+    menuPosition: 'left',
+    extraBreakpoints: EXTRA_BREAKPOINTS
 };
 
 Header.propTypes = {
@@ -75,6 +97,7 @@ Header.propTypes = {
     logo: PropTypes.element,
     menu: PropTypes.element,
     menuBreakpoints: PropTypes.object,
+    menuPosition: PropTypes.oneOf(['right', 'left']),
     version: PropTypes.string,
     onBurgerClick: PropTypes.func
 };

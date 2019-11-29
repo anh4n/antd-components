@@ -6,7 +6,6 @@ import {
     DEFAULT_THEME,
     LocaleProvider,
     ThemeProvider,
-    Flyout,
     MotionDrawer,
     Logo,
     Header,
@@ -49,30 +48,8 @@ export const App = () => {
         setOpen(e);
     };
 
-    const headerRoutes = [
-        {
-            key: 'home',
-            label: 'Home',
-            icon: 'home',
-            path: '/',
-            exact: true
-        },
-        {
-            key: 'contact',
-            label: 'Contact',
-            icon: 'edit',
-            path: '/Navigation/Contact/Home',
-        },
-        {
-            key: 'Impressum',
-            label: 'Impressum',
-            icon: 'setting',
-            path: '/Navigation/Impressum/Home',
-        }
-    ];
-
     const Extra = (
-        <div style={{ textAlign: 'right', paddingRight: 5 }}>
+        <div style={{ textAlign: 'right' }}>
             <Select
                 style={{ padding: 5 }}
                 size={'small'}
@@ -127,7 +104,6 @@ export const App = () => {
                         <Row>
                             <Header
                                 logo={<Logo image={`images/logo-${theme}.png`}>React Hangar</Logo>}
-                                menu={<Flyout routes={headerRoutes} openSubmenus='selected'/>}
                                 extra={Extra}
                                 onBurgerClick={onDrawerBtnClick}
                                 version={'v1.0.0'}

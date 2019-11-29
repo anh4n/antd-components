@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export const Logo = (props) => {
-    const { children, image, ...restProps } = props;
+    const { children, to, image, ...restProps } = props;
 
     return (
         <div className={'logo'} {...restProps}>
-            <Link to="/">
+            <Link to={to}>
                 {
                     image ? <div className={'image'}><img src={image}/></div> : null
                 }
@@ -17,10 +17,13 @@ export const Logo = (props) => {
     );
 };
 
-Logo.defaultProps = {};
+Logo.defaultProps = {
+    to: '/'
+};
 
 Logo.propTypes = {
     children: PropTypes.string,
+    to: PropTypes.string,
     image: PropTypes.string
 };
 

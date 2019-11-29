@@ -5,12 +5,13 @@ import { FormComponent } from './pages/Form';
 import { FlyoutNavigationComponent, SideNavigationComponent } from './pages/Navigation';
 import { DataGridComponent, FormGridComponent } from './pages/Grid';
 import { Buttons } from './pages/Buttons';
-import {ListFieldComponent} from "./pages/ListField";
-import {EditorComponent} from "./pages/Editor";
-import {CodeMirrorComponent} from "./pages/CodeMirror";
-import {UploadComponent} from "./pages/Upload";
-import {MotionDrawerComponent} from "./pages/MotionDrawer";
+import { ListFieldComponent } from './pages/ListField';
+import { EditorComponent } from './pages/Editor';
+import { CodeMirrorComponent } from './pages/CodeMirror';
+import { UploadComponent } from './pages/Upload';
+import { MotionDrawerComponent } from './pages/MotionDrawer';
 import { SelectComponent } from './pages/Select';
+import { LayoutHeader } from './pages/Layout';
 
 export const routes = [
     {
@@ -92,6 +93,19 @@ export const routes = [
                 path: '/FormGrid',
                 component: FormGridComponent
             }
+        ],
+    },
+    {
+        key: 'layout',
+        label: 'Layout',
+        path: '/Layout',
+        submenu: [
+            {
+                key: 'header',
+                label: 'Header',
+                path: '/Header',
+                component: LayoutHeader
+            },
         ],
     },
     {
