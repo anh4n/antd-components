@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Col, Icon, Layout, Row } from 'antd';
-import { emptyFn } from '../helper';
-import { ThemeContext } from '..';
+import { Flyout, MotionDrawer, SideNavi, ThemeContext } from '..';
 import { sumBreakPoints } from '.';
 
 const { Header: AntdHeader } = Layout;
@@ -18,21 +17,24 @@ export const Header = (props) => {
         extra,
         extraBreakpoints,
         logo,
-        menu,
         menuBreakpoints,
         menuPosition,
+        menuProps,
+        menuRoutes,
+        siderRoutes,
+        siderProps,
         version,
-        onBurgerClick,
         children,
         ...restProps
     } = props;
 
+    const [open, setOpen] = useState(false);
     const { theme } = useContext(ThemeContext);
 
     let extraBP = extraBreakpoints;
     let menuBP = menuBreakpoints;
 
-    if (!menu) extraBP = sumBreakPoints(extraBP, menuBP);
+    if (!menuRoutes) extraBP = sumBreakPoints(extraBP, menuBP);
     if (!extra) menuBP = sumBreakPoints(menuBP, extraBP);
 
     const burgerStyle = {
@@ -45,7 +47,7 @@ export const Header = (props) => {
 
     const renderBurgerIcon = () => (
         <Col {...BURGER_BREAKPOINTS}>
-            <Icon className='burger-icon' type='menu' style={burgerStyle} onClick={onBurgerClick}/>
+            <Icon className='burger-icon' type='menu' style={burgerStyle} onClick={() => setOpen(true)}/>
         </Col>
     );
 
@@ -54,7 +56,7 @@ export const Header = (props) => {
     );
 
     const renderMenu = () => (
-        menu ? <Col {...menuBP} style={menuStyle}>{menu}</Col> : null
+        menuRoutes ? <Col {...menuBP} style={menuStyle}><Flyout routes={menuRoutes} {...menuProps}/></Col> : null
     );
 
     const renderExtra = () => (
@@ -67,37 +69,47 @@ export const Header = (props) => {
         </Col> : null
     );
 
+    const sideNaviProps = siderProps || menuProps;
+
     return (
-        <AntdHeader
-            className={`${theme}-header hangar-header`}
-            {...restProps}
-        >
-            <Row>
-                {renderBurgerIcon()}
-                {renderLogo()}
-                {renderMenu()}
-                {renderExtra()}
-                {renderVersion()}
-                {children}
-            </Row>
-        </AntdHeader>
+        <Fragment>
+            <MotionDrawer width={300} open={open} onChange={v => setOpen(v)}>
+                <SideNavi routes={siderRoutes || menuRoutes} {...sideNaviProps}/>
+            </MotionDrawer>
+
+            <AntdHeader
+                className={`${theme}-header hangar-header`}
+                {...restProps}
+            >
+                <Row>
+                    {renderBurgerIcon()}
+                    {renderLogo()}
+                    {renderMenu()}
+                    {renderExtra()}
+                    {renderVersion()}
+                    {children}
+                </Row>
+            </AntdHeader>
+        </Fragment>
     );
 };
 
 Header.defaultProps = {
-    onBurgerClick: emptyFn,
+    extraBreakpoints: EXTRA_BREAKPOINTS,
     menuBreakpoints: MENU_BREAKPOINTS,
     menuPosition: 'left',
-    extraBreakpoints: EXTRA_BREAKPOINTS
+    menuProps: {}
 };
 
 Header.propTypes = {
     extra: PropTypes.element,
     extraBreakpoints: PropTypes.object,
     logo: PropTypes.element,
-    menu: PropTypes.element,
     menuBreakpoints: PropTypes.object,
     menuPosition: PropTypes.oneOf(['right', 'left']),
-    version: PropTypes.string,
-    onBurgerClick: PropTypes.func
+    menuProps: PropTypes.object,
+    menuRoutes: PropTypes.array,
+    siderProps: PropTypes.object,
+    siderRoutes: PropTypes.array,
+    version: PropTypes.string
 };

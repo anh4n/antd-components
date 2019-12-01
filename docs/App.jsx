@@ -6,7 +6,6 @@ import {
     DEFAULT_THEME,
     LocaleProvider,
     ThemeProvider,
-    MotionDrawer,
     Logo,
     Header,
     renderRoutes,
@@ -26,7 +25,6 @@ export const App = () => {
     const [locale, setLocale] = useState(DEFAULT_LOCALE);
     const [theme, setTheme] = useState(DEFAULT_THEME);
     const [color, setColor] = useState('antd-red');
-    const [open, setOpen] = useState(false);
 
     const onLocaleChange = (value) => {
         setLocale(value);
@@ -38,14 +36,6 @@ export const App = () => {
 
     const onColorChange = (value) => {
         setColor(value);
-    };
-
-    const onDrawerBtnClick = () => {
-        setOpen(true);
-    };
-
-    const onChange = (e) => {
-        setOpen(e);
     };
 
     const Extra = (
@@ -96,20 +86,15 @@ export const App = () => {
             <Router>
                 <ThemeProvider theme={theme} setTheme={setTheme}>
                     <LocaleProvider locale={locale} setLocale={setLocale}>
-
-                        <MotionDrawer width={300} open={open} onChange={onChange}>
-                            <Menu/>
-                        </MotionDrawer>
-
                         <Row>
                             <Header
                                 logo={<Logo image={`images/logo-${theme}.png`}>React Hangar</Logo>}
                                 extra={Extra}
-                                onBurgerClick={onDrawerBtnClick}
+                                siderRoutes={routes}
+                                siderProps={{ openSubmenus: 'all' }}
                                 version={'v1.0.0'}
                             />
                         </Row>
-
                         <Row>
                             <Col style={{ height: '100vh' }} xs={0} md={8} xl={5} xxl={4}>
                                 <Menu/>
@@ -122,7 +107,6 @@ export const App = () => {
                                 </Wrapper>
                             </Col>
                         </Row>
-
                     </LocaleProvider>
                 </ThemeProvider>
             </Router>
