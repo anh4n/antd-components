@@ -26,7 +26,7 @@ export const ListField = forwardRef((props, ref) => {
     }, [lastKey]);
 
     const onInputChange = (key, e) => {
-        const value = e.target.value;
+        const { value } = e.target;
         setStore(prevStore =>
             PureArray.update(prevStore, ['key', key], { key, value })
         );
@@ -35,10 +35,9 @@ export const ListField = forwardRef((props, ref) => {
     const add = (key) => {
         const newKey = nanoid(10);
         setStore(prevStore => {
-                const index = prevStore.findIndex(el => el.key === key);
-                return PureArray.insert(prevStore, { key: newKey, value: '' }, index);
-            }
-        );
+            const index = prevStore.findIndex(el => el.key === key);
+            return PureArray.insert(prevStore, { key: newKey, value: '' }, index);
+        });
 
         setLastKey(newKey);
     };
@@ -50,8 +49,8 @@ export const ListField = forwardRef((props, ref) => {
     };
 
     const handleKeyPress = (key, e) => {
-        e.preventDefault();
         if (e.key === 'Enter') {
+            e.preventDefault();
             add(key);
         }
     };

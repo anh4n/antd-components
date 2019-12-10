@@ -10,7 +10,9 @@ const remove = (array, predicate) => [
     ...array.filter(rec => rec[predicate[0]] !== predicate[1])
 ];
 
-const update = (array, predicate, item) => array.map(rec => rec[predicate[0]] === predicate[1] ? item : rec);
+const update = (array, predicate, item) => (
+    array.map(rec => rec[predicate[0]] === predicate[1] ? item : rec)
+);
 
 export const PureArray = {
     insert,
