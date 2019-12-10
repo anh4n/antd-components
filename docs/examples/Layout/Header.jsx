@@ -38,9 +38,8 @@ const Example = () => {
         <Fragment>
             <ThemeProvider theme={'light'}>
                 <Header
-                    logo={<Logo to={'/Layout/Header'}>No Image</Logo>}
+                    logo={<Logo to={'/Layout/Header'} version={'v1.0.0'}>No Image</Logo>}
                     menuRoutes={routes}
-                    version={'v1.0.0'}
                 />
             </ThemeProvider>
             <br/>
@@ -49,54 +48,48 @@ const Example = () => {
                 <Header
                     logo={<Logo to={'/Layout/Header'} image={'images/logo-black-blue.png'}/>}
                     menuRoutes={routes}
-                    version={'v1.0.0'}
                 />
             </ThemeProvider>
             <br/>
             <br/>
             <ThemeProvider theme={'light'}>
                 <Header
-                    logo={<Logo to={'/Layout/Header'} image={'images/logo-black-blue.png'}>Menu Right</Logo>}
+                    logo={<Logo to={'/Layout/Header'} image={'images/logo-black-blue.png'} version={'v1.0.0'}>Menu Right</Logo>}
                     menuRoutes={routes}
                     menuPosition={'right'}
-                    version={'v1.0.0'}
                 />
             </ThemeProvider>
             <br/>
             <br/>
             <ThemeProvider theme={'light'}>
                 <Header
-                    logo={<Logo to={'/Layout/Header'} image={'images/logo-black-blue.png'}>Extra</Logo>}
+                    logo={<Logo to={'/Layout/Header'} image={'images/logo-black-blue.png'} version={'v1.0.0'}>Extra</Logo>}
                     menuRoutes={routes}
                     extra={extras}
-                    version={'v1.0.0'}
                 />
             </ThemeProvider>
             <br/>
             <br/>
             <ThemeProvider theme={'light'}>
                 <Header
-                    logo={<Logo to={'/Layout/Header'} image={'images/logo-black-blue.png'}>Extra Only</Logo>}
+                    logo={<Logo to={'/Layout/Header'} image={'images/logo-black-blue.png'} version={'v1.0.0'}>Extra Only</Logo>}
                     extra={extras}
-                    version={'v1.0.0'}
                 />
             </ThemeProvider>
             <br/>
             <br/>
             <ThemeProvider theme={'light'}>
                 <Header
-                    logo={<Logo to={'/Layout/Header'} image={'images/logo-black-blue.png'}>Light</Logo>}
+                    logo={<Logo to={'/Layout/Header'} image={'images/logo-black-blue.png'} version={'v1.0.0'}>Light</Logo>}
                     menuRoutes={routes}
-                    version={'v1.0.0'}
                 />
             </ThemeProvider>
             <br/>
             <br/>
             <ThemeProvider theme={'dark'}>
                 <Header
-                    logo={<Logo to={'/Layout/Header'} image={'images/logo-white-blue.png'}>Dark</Logo>}
+                    logo={<Logo to={'/Layout/Header'} image={'images/logo-white-blue.png'} version={'v1.0.0'}>Dark</Logo>}
                     menuRoutes={routes}
-                    version={'v1.0.0'}
                 />
             </ThemeProvider>
         </Fragment>
@@ -144,9 +137,8 @@ const code = `
             <Fragment>
                 <ThemeProvider theme={'light'}>
                     <Header
-                        logo={<Logo to={'/Layout/Header'}>No Image</Logo>}
+                        logo={<Logo to={'/Layout/Header'} version={'v1.0.0'}>No Image</Logo>}
                         menuRoutes={routes}
-                        version={'v1.0.0'}
                     />
                 </ThemeProvider>
                 <br/>
@@ -155,54 +147,48 @@ const code = `
                     <Header
                         logo={<Logo to={'/Layout/Header'} image={'images/logo-black-blue.png'}/>}
                         menuRoutes={routes}
-                        version={'v1.0.0'}
                     />
                 </ThemeProvider>
                 <br/>
                 <br/>
                 <ThemeProvider theme={'light'}>
                     <Header
-                        logo={<Logo to={'/Layout/Header'} image={'images/logo-black-blue.png'}>Menu Right</Logo>}
+                        logo={<Logo to={'/Layout/Header'} image={'images/logo-black-blue.png'} version={'v1.0.0'}>Menu Right</Logo>}
                         menuRoutes={routes}
                         menuPosition={'right'}
-                        version={'v1.0.0'}
                     />
                 </ThemeProvider>
                 <br/>
                 <br/>
                 <ThemeProvider theme={'light'}>
                     <Header
-                        logo={<Logo to={'/Layout/Header'} image={'images/logo-black-blue.png'}>Extra</Logo>}
+                        logo={<Logo to={'/Layout/Header'} image={'images/logo-black-blue.png'} version={'v1.0.0'}>Extra</Logo>}
                         menuRoutes={routes}
                         extra={extras}
-                        version={'v1.0.0'}
                     />
                 </ThemeProvider>
                 <br/>
                 <br/>
                 <ThemeProvider theme={'light'}>
                     <Header
-                        logo={<Logo to={'/Layout/Header'} image={'images/logo-black-blue.png'}>Extra Only</Logo>}
+                        logo={<Logo to={'/Layout/Header'} image={'images/logo-black-blue.png'} version={'v1.0.0'}>Extra Only</Logo>}
                         extra={extras}
-                        version={'v1.0.0'}
                     />
                 </ThemeProvider>
                 <br/>
                 <br/>
                 <ThemeProvider theme={'light'}>
                     <Header
-                        logo={<Logo to={'/Layout/Header'} image={'images/logo-black-blue.png'}>Light</Logo>}
+                        logo={<Logo to={'/Layout/Header'} image={'images/logo-black-blue.png'} version={'v1.0.0'}>Light</Logo>}
                         menuRoutes={routes}
-                        version={'v1.0.0'}
                     />
                 </ThemeProvider>
                 <br/>
                 <br/>
                 <ThemeProvider theme={'dark'}>
                     <Header
-                        logo={<Logo to={'/Layout/Header'} image={'images/logo-white-blue.png'}>Dark</Logo>}
+                        logo={<Logo to={'/Layout/Header'} image={'images/logo-white-blue.png'} version={'v1.0.0'}>Dark</Logo>}
                         menuRoutes={routes}
-                        version={'v1.0.0'}
                     />
                 </ThemeProvider>
             </Fragment>
@@ -256,8 +242,7 @@ const properties = [
         description: <Fragment>Routes config. If not set <Code>menuRoutes</Code> will be used</Fragment>,
         type: 'object[]',
         default: ''
-    },
-    { property: 'version', description: 'Version', type: 'string', default: '' }
+    }
 ];
 
 export default () => (

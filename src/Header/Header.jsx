@@ -9,10 +9,9 @@ import { MotionDrawer } from '@root';
 const { Header: AntdHeader } = Layout;
 
 const BURGER_BREAKPOINTS = { xs: 2, md: 0, xl: 0, xxl: 0 };
-const LOGO_BREAKPOINTS = { xs: 18, md: 8, xl: 5, xxl: 4 };
+const LOGO_BREAKPOINTS = { xs: 22, md: 11, xl: 6, xxl: 5 };
 const MENU_BREAKPOINTS = { xs: 0, md: 13, xl: 12, xxl: 13 };
 const EXTRA_BREAKPOINTS = { xs: 0, md: 0, xl: 6, xxl: 6 };
-const VERSION_BREAKPOINTS = { xs: 4, md: 3, xl: 1, xxl: 1 };
 
 export const Header = (props) => {
     const {
@@ -66,12 +65,6 @@ export const Header = (props) => {
         extra ? <Col {...extraBP} style={{ textAlign: 'right' }}>{extra}</Col> : null
     );
 
-    const renderVersion = () => (
-        version ? <Col {...VERSION_BREAKPOINTS}>
-            <div className={'version'}>{version}</div>
-        </Col> : null
-    );
-
     const sideNaviProps = siderProps || menuProps;
 
     return (
@@ -89,7 +82,6 @@ export const Header = (props) => {
                     {renderLogo()}
                     {renderMenu()}
                     {renderExtra()}
-                    {renderVersion()}
                     {children}
                 </Row>
             </AntdHeader>

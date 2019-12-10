@@ -94,12 +94,11 @@ export const App = () => {
                     <LocaleProvider locale={locale} setLocale={setLocale}>
                         <Row>
                             <Header
-                                logo={<Logo image={`images/logo-${theme}.png`}>React Hangar</Logo>}
+                                logo={<Logo image={`images/logo-${theme}.png`} version={'v1.0.0'}>Antd Components</Logo>}
                                 extra={extra}
                                 sider={sider}
                                 siderRoutes={routes}
                                 siderProps={{ openSubmenus: 'all' }}
-                                version={'v1.0.0'}
                             />
                         </Row>
                         <Row>
