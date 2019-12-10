@@ -1,4 +1,3 @@
-import { NotFound } from './pages/NotFound';
 import { Home } from './pages/Home';
 import { Typography } from './pages/Typography';
 import { FormComponent } from './pages/Form';
@@ -139,10 +138,5 @@ export const routes = [
         label: 'Motion Drawer',
         path: '/MotionDrawer',
         component: MotionDrawerComponent
-    },
-    {
-        key: 'notfound',
-        component: NotFound,
-        hideInMenu: true
     }
 ];
