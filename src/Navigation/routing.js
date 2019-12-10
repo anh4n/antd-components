@@ -1,17 +1,18 @@
 import React from 'react';
 import { matchPath, Route } from 'react-router';
+import { Switch } from 'react-router-dom';
 import { NotFound } from '@root/Navigation/NotFound';
 
 const buildRoutes = (routes, parentPath = '') => (
     routes.map(route => {
-        const {key, submenu, path} = route;
+        const { key, submenu, path } = route;
         const currentPath = parentPath + path;
 
         if (submenu) {
             return buildRoutes(submenu, currentPath);
         }
 
-        return <Route key={key} {...route} path={currentPath} />;
+        return <Route key={key} {...route} path={currentPath}/>;
     })
 );
 
@@ -32,7 +33,11 @@ export const renderRoutes = (routes, config) => {
         });
     }
 
-    return buildRoutes(routes);
+    return (
+        <Switch>
+            {buildRoutes(routes)}
+        </Switch>
+    );
 };
 
 export const getActiveRoutes = (routes, location, parentPath = '') => {

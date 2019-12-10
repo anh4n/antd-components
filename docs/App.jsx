@@ -108,9 +108,7 @@ export const App = () => {
                             </Col>
                             <Col xs={24} md={16} xl={19} xxl={20}>
                                 <Wrapper className={'markdown-body'}>
-                                    <Switch>
-                                        {renderRoutes(routes)}
-                                    </Switch>
+                                    {renderRoutes(routes)}
                                 </Wrapper>
                             </Col>
                         </Row>
