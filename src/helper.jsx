@@ -22,7 +22,7 @@ export const prettifyJson = (json, space = 4) => (typeof json === 'object')
     ? JSON.stringify(json, undefined, space)
     : json;
 
-export const recursiveMap = (children, fn) => {
+const recursiveMap = (children, fn) => {
     if (React.Children.count(children) <= 1) {
         return children;
     }
@@ -40,4 +40,8 @@ export const recursiveMap = (children, fn) => {
 
         return fn(child);
     });
+};
+
+export const ReactChildren = {
+    recursiveMap
 };
