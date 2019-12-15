@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Icon, Menu } from 'antd';
+import { ExternLink } from '@root/Navigation/ExternLink';
 
 const renderLabel = (label, icon) => {
     return (
@@ -10,15 +11,18 @@ const renderLabel = (label, icon) => {
     );
 };
 
-const renderMenuItem = ({ key, label, path, icon }) => (
+const renderMenuItem = ({ key, label, path, url, icon }) => (
     <Menu.Item key={key}>
-        <NavLink to={path}>{renderLabel(label, icon)}</NavLink>
+        { url
+            ? <ExternLink to={url}>{renderLabel(label, icon)}</ExternLink>
+            : <NavLink to={path}>{renderLabel(label, icon)}</NavLink>
+        }
     </Menu.Item>
 );
 
 export const renderMenu = (routes, parentPath = '') => (
     routes.map(route => {
-        const { key, label, path, icon, hideInMenu, submenu, group } = route;
+        const { key, label, path, url, icon, hideInMenu, submenu, group } = route;
         const currentPath = parentPath + path;
 
         if (hideInMenu) return null;
@@ -39,6 +43,6 @@ export const renderMenu = (routes, parentPath = '') => (
             );
         }
 
-        return renderMenuItem({ key, label, path: currentPath, icon });
+        return renderMenuItem({ key, label, path: currentPath, url, icon });
     })
 );

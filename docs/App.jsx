@@ -39,6 +39,20 @@ const App = () => {
         setColor(value);
     };
 
+    const menuRoutes = [
+        {
+            key: 'github',
+            label: 'GitHub',
+            icon: 'github',
+            url: 'https://github.com/anh4n/antd-components'
+        },
+        {
+            key: 'npm',
+            label: 'NPM',
+            url: 'https://www.npmjs.com/package/@react-hangar/antd-components',
+        }
+    ];
+
     const extra = [
         <Select
             key={'theme'}
@@ -96,9 +110,10 @@ const App = () => {
                         <Row>
                             <Header
                                 logo={<Logo image={`images/logo-${theme}.png`} version={`v${PACKAGE_VERSION}`}>Antd Components</Logo>}
+                                menuRoutes={menuRoutes}
                                 extra={extra}
                                 sider={sider}
-                                siderRoutes={routes}
+                                siderRoutes={[...routes, ...menuRoutes]}
                                 siderProps={{ openSubmenus: 'all' }}
                             />
                         </Row>
