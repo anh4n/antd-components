@@ -8,19 +8,19 @@ export const Logo = (props) => {
     const lineHeight = (version) ? '50px' : '64px';
 
     return (
-        <div className={'logo'} {...restProps}>
-            <Link to={to}>
+        <Link to={to}>
+            <div className={'logo'} {...restProps}>
                 {
                     image ? <div className={'image'}><img src={image}/></div> : null
                 }
-                <span className={'text'} style={{lineHeight}}>
-                    {children}
-                </span>
-
-                {version ? <span className={'version'}> {version} </span> : null}
-
-            </Link>
-        </div>
+                <div>
+                    <span className={'text'} style={{ lineHeight }}>
+                        {children}
+                    </span>
+                    {version ? <span className={'version'}> {version} </span> : null}
+                </div>
+            </div>
+        </Link>
     );
 };
 
