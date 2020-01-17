@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
 import { Form, SaveButton, FormItem } from '../../../src';
 import { Input, message } from 'antd';
@@ -6,19 +6,16 @@ import faker from 'faker';
 import { Code, generateImages } from '../../components/utils';
 import nanoid from 'nanoid';
 
-const generateOption = () => {
-    const v = faker.commerce.productMaterial();
-
-    return ({
-        label: v,
-        value: nanoid()
-    });
-};
-
 const options = [
-    generateOption(),
-    generateOption(),
-    generateOption()
+    {   label: 'Cotton',
+        value: 'Cotton'
+    },
+    {   label: 'Plastic',
+        value: 'Plastic'
+    },
+    {   label: 'Steel',
+        value: 'Steel'
+    },
 ];
 
 const treeConfig = {
@@ -31,6 +28,7 @@ const generateFakeData = () => ({
     _id: nanoid(10),
     company: faker.company.companyName(),
     product: faker.commerce.productName(),
+    material: 'Cotton',
     list: [
         faker.name.findName(),
         faker.name.findName(),
@@ -60,10 +58,11 @@ const generateFakeData = () => ({
     ]
 });
 
-
 // Example implementation
 const Example = () => {
     const action = 'http://www.mocky.io/v2/5daf53d53200006d00d961e1';
+
+    let form = {};
 
     const onUploaded = (response) => {
         console.log(response);
@@ -74,17 +73,26 @@ const Example = () => {
         console.log(data);
     };
 
+    const onSelect = (e) => {
+        form.setFieldsValue({material: e});
+    };
+
+    const onAfterRenderForm = (e) => {
+        form = e
+    };
+
     return (
-        <Form onSubmit={handleSubmit} record={generateFakeData()}>
+        <Form onAfterRenderForm={onAfterRenderForm} onSubmit={handleSubmit} record={generateFakeData()}>
             <FormItem label='Company Name' dataIndex={'company'} required>
                 <Input/>
             </FormItem>
             <FormItem fieldType={'string'} label='Product Name' dataIndex={'product'} required/>
-            <FormItem fieldType={'string'} label='Text with Validator' dataIndex={'text'} rules={[{ max: 10 }]}/>
-            <FormItem fieldType={'select'} label='Material' dataIndex={'material'} fieldProps={{ options }} required/>
+            <FormItem fieldType={'string'} label='Text with Validator' dataIndex={'text'} rules={[{max: 10}]}/>
+            <FormItem fieldType={'select'} label='Material' dataIndex={'material'}
+                      fieldProps={{options, onSelect: onSelect}} required/>
             <FormItem fieldType={'list'} label='List' dataIndex={'list'}/>
             <FormItem fieldType={'image'} dataIndex={'image'} label={'Upload Form Item'} required fieldProps={{
-                type: { image: ['jpeg', 'png'] },
+                type: {image: ['jpeg', 'png']},
                 action,
                 onUploaded,
                 multiple: true,
@@ -107,6 +115,8 @@ const code = `
     import { Form, FormItem, SaveButton } from '@react-hangar/antd-components';
 
     const Example = () => {
+
+        let form = {}
 
         const options = [
             {label: 'A', value: 'a'},
@@ -142,17 +152,25 @@ const code = `
             console.log(data);
         };
 
+        const onSelect = (e) => {
+            form.setFieldsValue({material: e});
+        };
+
+        const onAfterRenderForm = (e) => {
+            form = e
+        };
+
         return (
-            <Form onSubmit={handleSubmit} company={'Lindgren - Yundt'} product={'Unbranded Soft Chips'}
+            <Form onAfterRenderForm={onAfterRenderForm} onSubmit={handleSubmit} company={'Lindgren - Yundt'} product={'Unbranded Soft Chips'}
                   image={fileList}>
                 <FormItem label='Company Name' dataIndex={'company'} required>
                     <Input/>
                 </FormItem>
                 <FormItem fieldType={'string'} label='Product Name' dataIndex={'product'} required/>
-                <FormItem fieldType={'string'} label='Text with Validator' dataIndex={'text'} rules={[{ max: 10 }]}/>
-                <FormItem fieldType={'select'} label='Material' dataIndex={'material'} fieldProps={{ options }} required/>
+                <FormItem fieldType={'string'} label='Text with Validator' dataIndex={'text'} rules={[{max: 10}]}/>
+                <FormItem fieldType={'select'} label='Material' dataIndex={'material'} fieldProps={{options, onSelect: onSelect}} required/>
                 <FormItem fieldType={'image'} dataIndex={'image'} label={'Upload Form Item'} required fieldProps={{
-                    type: { image: ['jpeg', 'png'] },
+                    type: {image: ['jpeg', 'png']},
                     action: '/path/upload',
                     onUploaded,
                     multiple: true,
@@ -183,7 +201,11 @@ const properties = [
         property: 'onSubmit',
         description: 'Callback function if form is submited and valid',
         type: 'function'
-    },
+    }, {
+        property: 'onAfterRenderForm',
+        description: 'returns form after render the form has been rendered.',
+        type: 'function'
+    }
 ];
 const formItemProperties = [
     {

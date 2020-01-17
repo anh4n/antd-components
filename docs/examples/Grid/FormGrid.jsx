@@ -1,8 +1,8 @@
-import React, {Fragment, useState} from 'react';
+import React, { Fragment, useState } from 'react';
 import faker from 'faker';
-import {message} from 'antd';
-import {ComponentDisplay} from '../../components/ComponentDisplay';
-import {FormGrid, Column, FormItem} from '../../../src';
+import { message } from 'antd';
+import { ComponentDisplay } from '../../components/ComponentDisplay';
+import { FormGrid, Column, FormItem } from '../../../src';
 import nanoid from 'nanoid';
 import {
     Code,
@@ -55,6 +55,8 @@ const defaultData = generateFakeDataArray(5, generateFakeData);
 const Example = () => {
     const [data, setData] = useState(defaultData);
 
+    let form = {};
+
     const onAdd = () => {
         return {
             text: faker.random.word()
@@ -92,6 +94,14 @@ const Example = () => {
         });
     };
 
+    const onSelect = (e) => {
+        form.setFieldsValue({material: e});
+    };
+
+    const onAfterRenderForm = (e) => {
+        form = e
+    };
+
     const imageConfig = {
         action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1',
         type: {image: ['jpeg', 'png']}
@@ -113,8 +123,10 @@ const Example = () => {
             onDelete={onDelete}
             onSave={onSave}
             idProperty={'_id'}
+            onAfterRenderForm={onAfterRenderForm}
         >
-            <Column title={'Salutation'} dataIndex={'salutation'} fieldType={'select'} fieldProps={{options}} required/>
+            <Column title={'Salutation'} dataIndex={'salutation'} fieldType={'select'}
+                    fieldProps={{options, onSelect: onSelect}} required/>
             <Column title={'Title'} dataIndex={'text'} fieldType={'string'} required maxLength={30}/>
             <Column title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
             <Column title={'Image'} dataIndex={'image'} fieldType={'image'} fieldProps={imageConfig}/>
@@ -133,8 +145,8 @@ const code = `
     import { FormGrid, Column, FormItem } from '@react-hangar/antd-components'
 
     const options = [
-        { label: 'Mr', value: 'mr' },
-        { label: 'Mrs', value: 'mrs' }
+        {label: 'Mr', value: 'mr'},
+        {label: 'Mrs', value: 'mrs'}
     ];
 
     const defaultData = [
@@ -276,6 +288,8 @@ const code = `
         const [data, setData] = useState(defaultData);
         const [recordId, setRecordId] = useState();
 
+        let form = {};
+
         const onAdd = () => {
             return {
                 text: faker.random.word()
@@ -348,9 +362,17 @@ const code = `
             setData(records);
         };
 
+        const onSelect = (e) => {
+            form.setFieldsValue({material: e});
+        };
+
+        const onAfterRenderForm = (e) => {
+            form = e
+        };
+
         const imageConfig = {
             action: 'http://www.mocky.io/v2/5daf53d53200006d00d961e1',
-            type: { image: ['jpeg', 'png'] }
+            type: {image: ['jpeg', 'png']}
         };
 
         const treeConfig = {
@@ -359,7 +381,7 @@ const code = `
             editable: true,
             formItems: [<FormItem key={3} fieldType={'string'} label='Component' dataIndex={'component'} required/>],
             defaultExpandAll: true,
-            onDelete:onDeleteTree,
+            onDelete: onDeleteTree,
             onSave: onSaveTree,
             onDrop: onDropTree
         };
@@ -371,8 +393,10 @@ const code = `
                 onDelete={onDelete}
                 onSave={onSave}
                 idProperty={'_id'}
+                onAfterRenderForm={onAfterRenderForm}
             >
-                <Column title={'Salutation'} dataIndex={'salutation'} fieldType={'select'} fieldProps={{ options }}
+                <Column title={'Salutation'} dataIndex={'salutation'} fieldType={'select'}
+                        fieldProps={{options, onSelect: onSelect}}
                         required/>
                 <Column title={'Title'} dataIndex={'text'} fieldType={'string'} required maxLength={30}/>
                 <Column title={'Content'} dataIndex={'html'} fieldType={'html'} required/>
@@ -415,6 +439,11 @@ const columnProperties = [
         type: 'number'
     },
     {property: 'required', description: 'set field as required', type: 'bool', default: 'false'},
+    {
+        property: 'onAfterRenderForm',
+        description: 'returns form after render the form has been rendered.',
+        type: 'function'
+    },
     {
         property: 'rules',
         description: 'Add validation rules (see: https://ant.design/components/form/#Validation-Rules)',

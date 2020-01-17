@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Select as AntdSelect } from 'antd';
 import nanoid from 'nanoid';
@@ -31,7 +31,7 @@ export const Select = forwardRef((props, ref) => {
     const { options, render, ...restProps } = props;
 
     return (
-        <AntdSelect ref={ref} {...restProps}>
+        <AntdSelect ref={ref}  {...restProps}>
             {renderOptions(options, render)}
         </AntdSelect>
     );

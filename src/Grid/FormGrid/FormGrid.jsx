@@ -5,6 +5,7 @@ import {Form} from '@root/DataEntry';
 import {SaveButton} from '@root/Buttons';
 import {renderForm} from '@root/Grid/renderer';
 import {BaseGrid} from '@root/Grid/BaseGrid';
+import { emptyFn } from '@root/helper';
 
 /**
  * @return {React.Component}
@@ -12,7 +13,7 @@ import {BaseGrid} from '@root/Grid/BaseGrid';
  * @constructor
  */
 export const FormGrid = (props) => {
-    const { idProperty, onSave, children, ...restProps } = props;
+    const { idProperty, onSave, children, onAfterRenderForm, ...restProps } = props;
     const [ isEditing, setEditing ] = useState(false);
     const [ selectedRowKeys, setSelectedRowKeys ] = useState([]);
     const [ isLoading, setLoading ] = useState(false);
@@ -34,7 +35,7 @@ export const FormGrid = (props) => {
         };
 
         return (
-            <Form onSubmit={handleSubmit} {...props}>
+            <Form onAfterRenderForm={onAfterRenderForm} onSubmit={handleSubmit} {...props}>
                 {renderForm(props, children)}
                 <SaveButton htmlType='submit'/>
             </Form>
@@ -62,7 +63,8 @@ export const FormGrid = (props) => {
 FormGrid.defaultProps = {
     dataSource: [],
     idProperty: 'id',
-    onSave: () => Promise.resolve()
+    onSave: () => Promise.resolve(),
+    onAfterRenderForm: emptyFn
 };
 
 FormGrid.propTypes = {
@@ -70,6 +72,7 @@ FormGrid.propTypes = {
     dataSource: PropTypes.array,
     idProperty: PropTypes.string,
     onAdd: PropTypes.func,
+    onAfterRenderForm: PropTypes.func,
     onDelete: PropTypes.func,
     onEdit: PropTypes.func,
     onSave: PropTypes.func

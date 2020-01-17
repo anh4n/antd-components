@@ -11,15 +11,18 @@ const hasErrors = (fieldsError) => {
 };
 
 const AntdFormWrapper = withForm((props) => {
-    const { record, onSubmit, disableSaveButtonOnError, children, form } = props;
-    const { getFieldsError } = form;
+    const {record, onSubmit, disableSaveButtonOnError, children, onAfterRenderForm, form} = props;
+    const {getFieldsError} = form;
     const formValidationError = l10n().Validation.form;
 
     useEffect(() => {
         if (disableSaveButtonOnError) {
             form.validateFields();
         }
+
+        onAfterRenderForm(form);
     }, []);
+
 
     const onHandleSubmit = (e) => {
         e.preventDefault();
@@ -29,7 +32,7 @@ const AntdFormWrapper = withForm((props) => {
                 return message.error(formValidationError);
             }
 
-            onSubmit(e,{
+            onSubmit(e, {
                 ...record,
                 ...data
             }, form);
@@ -56,12 +59,14 @@ const AntdFormWrapper = withForm((props) => {
         }
     });
 
+
+
     return (
         <AntdForm onSubmit={onHandleSubmit}>
             {formItems}
         </AntdForm>
     );
-}, { mapProps: true });
+}, {mapProps: true});
 
 /**
  * @return {React.Component}
@@ -75,11 +80,13 @@ export const Form = (props) => {
 Form.defaultProps = {
     disableSaveButtonOnError: false,
     record: {},
-    onSubmit: emptyFn
+    onSubmit: emptyFn,
+    onAfterRenderForm: emptyFn
 };
 
 Form.propTypes = {
     disableSaveButtonOnError: PropTypes.bool,
     record: PropTypes.object,
-    onSubmit: PropTypes.func
+    onSubmit: PropTypes.func,
+    onAfterRenderForm: PropTypes.func
 };

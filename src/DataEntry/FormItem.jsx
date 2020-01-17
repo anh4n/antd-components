@@ -66,6 +66,7 @@ export const FormItem = (props) => {
         children,
         editable,
         hideInGrid,
+        renderer,
         ...restProps
     } = props;
 
@@ -127,6 +128,7 @@ FormItem.propTypes = {
     required: PropTypes.bool,
     rules: PropTypes.array,
     title: PropTypes.string,
+    renderer: PropTypes.func,
     valuePropName: PropTypes.string,
 };
 
