@@ -5,6 +5,7 @@ import nanoid from 'nanoid';
 import { AddButton, BackButton, DeleteButton, EditButton } from '@root/Buttons';
 import { Column } from '@root/Grid';
 import { emptyFn } from '@root/helper';
+import { GridButton } from '@root/Grid/Button';
 
 export const EditableContext = React.createContext();
 
@@ -15,6 +16,7 @@ export const EditableContext = React.createContext();
  */
 export const BaseGrid = (props) => {
     const {
+        buttons,
         dataSource,
         editForm,
         extraColumns,
@@ -127,9 +129,21 @@ export const BaseGrid = (props) => {
     const getToolbar = () => {
         return () => (
             <Fragment>
-                <AddButton disabled={isEditing} onClick={onAddClick}/>
-                <EditButton disabled={isEditing || selectedRowKeys.length !== 1} onClick={onEditClick}/>
-                <DeleteButton disabled={selectedRowKeys.length === 0} onClick={onDeleteClick}/>
+                {
+                    buttons.includes(GridButton.ADD)
+                        ? <AddButton disabled={isEditing} onClick={onAddClick}/>
+                        : null
+                }
+                {
+                    buttons.includes(GridButton.EDIT)
+                        ? <EditButton disabled={isEditing || selectedRowKeys.length !== 1} onClick={onEditClick}/>
+                        : null
+                }
+                {
+                    buttons.includes(GridButton.DELETE)
+                        ? <DeleteButton disabled={selectedRowKeys.length === 0} onClick={onDeleteClick}/>
+                        : null
+                }
             </Fragment>
         );
     };
@@ -143,6 +157,16 @@ export const BaseGrid = (props) => {
         setEditing(false);
     };
 
+    let rowSelection = null;
+
+    if (buttons.includes(GridButton.EDIT) || buttons.includes(GridButton.DELETE)) {
+        rowSelection = {
+            selectedRowKeys,
+            getCheckboxProps,
+            onChange: onRowSelection
+        };
+    }
+
     return (
         <Table
             rowKey={idProperty}
@@ -151,17 +175,14 @@ export const BaseGrid = (props) => {
             dataSource={data}
             loading={isLoading}
             columns={columns}
-            rowSelection={{
-                selectedRowKeys,
-                getCheckboxProps,
-                onChange: onRowSelection
-            }}
+            rowSelection={rowSelection}
             {...restProps}
         />
     );
 };
 
 BaseGrid.defaultProps = {
+    buttons: [GridButton.ADD, GridButton.EDIT, GridButton.DELETE],
     children: [],
     idProperty: 'id',
     extraColumns: [],
@@ -171,6 +192,7 @@ BaseGrid.defaultProps = {
 };
 
 BaseGrid.propTypes = {
+    buttons: PropTypes.array,
     children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element]),
     dataSource: PropTypes.array,
     editForm: PropTypes.element,

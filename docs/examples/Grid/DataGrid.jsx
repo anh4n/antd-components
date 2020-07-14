@@ -149,6 +149,7 @@ const code = `
 
 // Component props
 const properties = [
+    { property: 'buttons', description: 'enabled toolbar buttons', type: 'string[]', default: '["add", "edit", "delete"]' },
     { property: 'dataSource', description: 'data source', type: 'object[]' },
     { property: 'idProperty', description: 'id field property of data source', type: 'string', default: 'id' },
     { property: 'onAdd', description: 'Function is called on record add', type: 'function' },
