@@ -19,7 +19,8 @@ module.exports = {
         username: 'Username',
         password: 'Password',
         rememberMe: 'Remember me',
-        forgotPassword: 'Forgot password',
+        forgotPassword: 'Forgot password?',
+        register: 'No account yet?',
         loginText: 'Log in'
     },
     Form: {

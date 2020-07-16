@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { ComponentDisplay } from '../../components/ComponentDisplay';
 import { Login } from '../../../src';
-import { message } from 'antd';
+import { Card, message } from 'antd';
 
 // Example implementation
 const Example = () => {
@@ -12,11 +12,13 @@ const Example = () => {
     };
 
     return (
-        <Login
-            onSubmit={handleSubmit}
-            showRememberMe
-            showForgotPassword
-        />
+        <Card title={'Login'} style={{maxWidth: 460}}>
+            <Login
+                showRememberMe
+                forgotPasswordUrl={'/forgot-password'}
+                registerUrl={'/register'}
+            />
+        </Card>
     );
 };
 
@@ -28,18 +30,20 @@ const code = `
     import { Login } from '@react-hangar/antd-components';
 
     const Example = () => {
-    
+
         const handleSubmit = (data, form) => {
             message.success('valid form');
             console.log(data);
         };
-    
+
         return (
-            <Login 
-                onSubmit={handleSubmit}
-                showRememberMe
-                showForgotPassword
-            />
+            <Card title={'Login'}>
+                <Login onSubmit={handleSubmit}
+                    showRememberMe
+                    forgotPasswordUrl={'/forgot-password'}
+                    registerUrl={'/register'}
+                />
+            </Card>
         );
     };
 
@@ -58,15 +62,13 @@ const properties = [
         type: 'boolean',
         default: 'false'
     },{
-        property: 'showForgotPassword',
-        description: 'Show forgot password link',
-        type: 'boolean',
-        default: 'false'
+        property: 'registerUrl',
+        description: 'shows registration link if url provided',
+        type: 'string'
     },{
         property: 'forgotPasswordUrl',
-        description: 'Forgot password Url',
-        type: 'string',
-        default: '/forgot-password'
+        description: 'shows forgot password link if url provided',
+        type: 'string'
     },
 ];
 

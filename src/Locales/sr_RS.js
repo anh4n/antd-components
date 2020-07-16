@@ -19,7 +19,8 @@ module.exports = {
         username: 'Корисничко име',
         password: 'Лозинка',
         rememberMe: 'сети ме се',
-        forgotPassword: 'Заборавио сам лозинку',
+        forgotPassword: 'Заборавио лозинку?',
+        register: 'нисте регистровани?',
         loginText: 'Пријави се'
     },
     Form: {
