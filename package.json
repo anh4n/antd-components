@@ -24,7 +24,7 @@
     "codemirror": "^5.50.2",
     "immutable": "^4.0.0-rc.12",
     "invert-color": "^2.0.0",
-    "nanoid": "^2.1.9",
+    "nanoid": "^3.1.31",
     "prop-types": "^15.7.2",
     "react-codemirror2": "^6.0.0",
     "react-hot-loader": "^4.12.18",
